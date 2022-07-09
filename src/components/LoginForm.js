@@ -91,7 +91,7 @@ const LoginForm = () => {
                     <input id="password" value={login.password} type="password" className="border-0 block w-full h-10 mx-2 mb-2" onChange={handleChange} name="password" placeholder="Password" required/>
                 </div>
                 <div className="flex items-center">
-                    <input type="checkbox" className="w-5 h-5" value={remember} onChange = {()=>setRemember(!remember)}/><label className="px-4">Remember me</label>
+                    <input type="checkbox" className="w-5 h-5" value={remember} onChange = {()=>setRemember(!remember)}/><label className="px-2 text-sm lg:text-base">Remember me</label>
                 </div>
                 <div className="py-2 text-end w-full"><a href="/" className="text-sm">Forgot password ?</a></div>
                 <button type="submit" className="rounded-2xl p-3 block border-2 w-full my-2 bg-gradient-to-r from-cyan-400 to-blue-500  font-semibold text-slate-50">Login</button>
@@ -99,7 +99,5 @@ const LoginForm = () => {
             </form>
     </>
   );
- 
 };
-
 export default LoginForm;
