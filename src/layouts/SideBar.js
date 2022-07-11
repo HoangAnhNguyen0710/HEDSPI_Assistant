@@ -4,6 +4,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PolicyOutlinedIcon from "@mui/icons-material/PolicyOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { NavLink } from "react-router-dom";
 import LoginIcon from '@mui/icons-material/Login';
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -55,9 +56,9 @@ const SideBar = () => {
           </a>
         </div>
         <div className="p-3 pl-8    rounded-sm border-solid border hover:bg-blue-400 hover:text-white">
-          <a href="/" className="flex items-center">
+          <NavLink to="/management" className="flex items-center">
             <SettingsOutlinedIcon sx={{ mr: 2 }} /> Trang quản lý
-          </a>
+          </NavLink>
         </div>
         <div className="p-3 pl-8    rounded-sm border-solid border hover:bg-blue-400 hover:text-white">
           <a href="/" className="flex items-center">

@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const userRef = useRef();
   const errRef = useRef();
    
@@ -76,27 +76,27 @@ const LoginForm = () => {
 //   }
   return (
     <>
-        <div className="rounded-lg p-3 py-6 font-semibold text-slate-700 self-center text-xl text-center font-mono">LOGIN</div>
+        <div className="rounded-lg p-3 py-6 font-semibold text-slate-700 self-center text-xl text-center font-mono block">LOGIN</div>
         <p ref={errRef} className={errMsg ? "bg-red-300  p-3" : ""}>{errMsg}</p>
             <form className="font-mono">
                 <label for="username">Username</label>
                 <div className="border-b-2 flex items-center mb-3">
                     <PersonOutlineIcon/>
-                    <input id="username" value={login.username} type="text" className="border-0 block w-full h-10 mx-2 mb-2" onChange={handleChange} name="username" placeholder="Username" ref={userRef} autoComplete="off" required/>
+                    <input id="username" value={login.username} type="text" className="border-0 block w-full h-10 mx-2" onChange={handleChange} name="username" placeholder="Username" ref={userRef} autoComplete="off" required/>
                 </div>
 
                 <label for="password">Password</label>
                 <div className="border-b-2 flex items-center mb-3">
                     <VpnKeyOutlinedIcon/>
-                    <input id="password" value={login.password} type="password" className="border-0 block w-full h-10 mx-2 mb-2" onChange={handleChange} name="password" placeholder="Password" required/>
+                    <input id="password" value={login.password} type="password" className="border-0 block w-full h-10 mx-2" onChange={handleChange} name="password" placeholder="Password" required/>
                 </div>
                 <div className="flex items-center">
                     <input type="checkbox" className="w-5 h-5" value={remember} onChange = {()=>setRemember(!remember)}/><label className="px-2 text-sm lg:text-base">Remember me</label>
                 </div>
                 <div className="py-2 text-end w-full"><a href="/" className="text-sm">Forgot password ?</a></div>
                 <button type="submit" className="rounded-2xl p-3 block border-2 w-full my-2 bg-gradient-to-r from-cyan-400 to-blue-500  font-semibold text-slate-50">Login</button>
-                <div className="py-2 text-sm"> Don't have an account ? <a href="/" className="text-blue-400">Sign up</a></div>
             </form>
+            <div className="py-2 text-sm"> Don't have an account ? <button className="text-blue-400" onClick={()=>props.setLoginSwitch(false)}>Sign up</button></div>
     </>
   );
 };

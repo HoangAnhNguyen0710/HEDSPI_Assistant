@@ -97,7 +97,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-center text-white font-medium my-3">
-        @2022 HEDSPI試験サポート. All right reserved
+        {/* @2022 HEDSPI試験サポート. All right reserved */}
+        @2022 HEDSPI Assistant. All right reserved
       </div>
     </div>
   );

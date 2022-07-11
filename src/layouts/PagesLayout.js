@@ -1,18 +1,41 @@
-import React from 'react'
-import Footer from './Footer';
-import NavBar from './NavBar';
+import React from "react";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { MutatingDots } from "react-loader-spinner";
 
 const PageLayout = (props) => {
+  //loader 1s
+  const [loader, setLoader] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 1000);
+  }, []);
 
   return (
-    <div className="flex">
-        <div className='w-full font-mono'>
-        <NavBar/>
-           {props.page}
-        <Footer/>
+    <>
+      <div className="flex">
+        <div className="w-full font-mono">
+          <NavBar />
+          {loader ? (
+            <div
+              id="preloader"
+              className="w-full bg-white h-full fixed top-0 right-0 bottom-0 left-0 z-20 flex items-center justify-center"
+            >
+              {/* <img className="rounded-full" src={loading} alt="" /> */}
+              <MutatingDots color="#06b6d4" height={80} width={80}/>
+            </div>
+          ) : (
+            <></>
+          )}
+          {props.page}
+          <Footer />
         </div>
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
 
 export default PageLayout;
