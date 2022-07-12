@@ -87,7 +87,7 @@ const SideBar = () => {
         edge="start"
         color="inherit"
         aria-label="open drawer"
-        sx={{ m: 0 }}
+        sx={{ p: 1 }}
         onClick={toggleDrawer(true)}
       >
         <MenuIcon />

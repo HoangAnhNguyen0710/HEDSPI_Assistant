@@ -13,7 +13,7 @@ import InfoIcon from "@mui/icons-material/Info";
 
 const Footer = () => {
   return (
-    <div className="p-10 bg-blue-500 flex flex-col w-full">
+    <div className="p-10 bg-main flex flex-col w-full">
       <div className="flex md:justify-between">
         <a href="/" className="w-1/4 md:w-1/6">
           <img alt="HEDSPI LOGO" src={logo} className="rounded-full w-fit" />
