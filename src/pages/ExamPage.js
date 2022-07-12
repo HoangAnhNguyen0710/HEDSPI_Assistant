@@ -1,15 +1,15 @@
 import React from "react";
 import PageLayout from "../layouts/PagesLayout";
 
-const BlogPage = () => {
-  const BlogContent = (
+const ExamPage = () => {
+  const ExamContent = (
     <>
       <div className="min-h-screen py-20">
-        <p className="">Blog Page</p>
+        <p className="">Exam Page</p>
       </div>
     </>
   );
-  return <PageLayout page={BlogContent} />;
+  return <PageLayout page={ExamContent} />;
 };
 
-export default BlogPage;
+export default ExamPage;
