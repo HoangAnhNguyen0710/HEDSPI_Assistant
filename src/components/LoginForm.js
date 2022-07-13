@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 // import { useDispatch } from "react-redux";
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const LoginForm = (props) => {
   const userRef = useRef();
@@ -96,7 +98,12 @@ const LoginForm = (props) => {
                 <div className="py-2 text-end w-full"><a href="/" className="text-sm">Forgot password ?</a></div>
                 <button type="submit" className="rounded-2xl p-3 block border-2 w-full my-2 bg-gradient-to-r from-cyan-400 to-blue-500  font-semibold text-slate-50">Login</button>
             </form>
-            <div className="py-2 text-sm"> Don't have an account ? <button className="text-blue-400" onClick={()=>props.setLoginSwitch(false)}>Sign up</button></div>
+            <div className="py-2 text-sm text-center"> Or login with<br/> 
+            <button className="text-blue-400 p-3 rounded-full"><FacebookIcon fontSize="large"/></button>
+            <button className="text-red-400 p-3"><GoogleIcon fontSize="large"/></button>
+            </div>
+            <div className="py-2 text-sm text-center"> Don't have an account ? <button className="text-blue-400" onClick={()=>props.setLoginSwitch(false)}>Sign up</button></div>
+            
     </>
   );
 };
