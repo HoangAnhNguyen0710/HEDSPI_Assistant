@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -53,7 +52,7 @@ export default function NavBar(props) {
             <div className="flex items-center">
               <SideBar />
               <NavLink
-                className=" text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs mx-1 px-3"
+                className=" text-white font-medium rounded-md md:text-base lg:text-lg text-xs mx-1 px-3"
                 to="/"
               >
                 <Avatar alt="" src={logo} />

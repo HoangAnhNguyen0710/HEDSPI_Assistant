@@ -6,7 +6,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { MutatingDots } from "react-loader-spinner";
 import { alpha, styled, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -63,7 +63,7 @@ const PageLayout = (props) => {
   return (
     <>
       <div className="flex">
-        <div className="w-full font-mono">
+        <div className="w-full font-sans">
           <NavBar />
           <div className="py-12 box-border"></div>
           <div className="flex justify-between mx-10">
@@ -71,7 +71,7 @@ const PageLayout = (props) => {
               <Search
                 sx={{
                   justifySelf: "space-between",
-                  display: { xs: "none", sm: "block" },
+                  display: { sm: "block" },
                 }}
               >
                 <SearchIconWrapper>
@@ -83,9 +83,9 @@ const PageLayout = (props) => {
                 />
               </Search>
             </div>
-            <NavLink className="flex items-center text-main" to='/login'>
-               <NotificationsNoneOutlinedIcon/>
-               <span className="pl-2">Login</span>
+            <NavLink className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 " to="/login">
+              <NotificationsNoneOutlinedIcon />
+              <span className="pl-2">Login</span>
             </NavLink>
           </div>
           {loader ? (

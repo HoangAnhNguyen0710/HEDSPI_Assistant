@@ -81,7 +81,7 @@ const SideBar = () => {
   );
 
   return (
-    <div className="hover:bg-slate-300 hover:text-slate-700 rounded-full">
+    <div className="">
       <IconButton
         size="large"
         edge="start"
@@ -89,6 +89,7 @@ const SideBar = () => {
         aria-label="open drawer"
         sx={{ p: 1 }}
         onClick={toggleDrawer(true)}
+        className="hover:bg-slate-50 hover:text-yellow-300 rounded-full  block text-white  font-medium md:text-base lg:text-lg text-xs md:p-3 md:m-2"
       >
         <MenuIcon />
       </IconButton>

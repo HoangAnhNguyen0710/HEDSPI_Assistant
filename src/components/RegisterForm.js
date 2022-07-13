@@ -5,7 +5,6 @@ import { useState, useRef, useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import { MenuItem, NativeSelect, Select } from "@mui/material";
 
 const RegisterForm = (props) => {
   //   const userRef = useRef();
