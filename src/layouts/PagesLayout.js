@@ -8,6 +8,7 @@ import { alpha, styled, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
+import DropdownMenu from "./DropdownMenu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const PageLayout = (props) => {
   //loader 1s
   const [loader, setLoader] = useState(true);
+  const [isLogin, setLogin] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
@@ -83,10 +85,17 @@ const PageLayout = (props) => {
                 />
               </Search>
             </div>
-            <NavLink className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 " to="/login">
-              <NotificationsNoneOutlinedIcon />
-              <span className="pl-2">Login</span>
-            </NavLink>
+            {isLogin ? (
+              <DropdownMenu/>
+            ) : (
+              <NavLink
+                className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 "
+                to="/login"
+              >
+                <NotificationsNoneOutlinedIcon />
+                <span className="pl-2">Login</span>
+              </NavLink>
+            )}
           </div>
           {loader ? (
             <div

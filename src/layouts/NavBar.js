@@ -8,7 +8,6 @@ import { NavLink } from "react-router-dom";
 import { Avatar, Menu, MenuItem, Slide, useScrollTrigger } from "@mui/material";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import PropTypes from "prop-types";
-import SideBar from "./SideBar";
 import logo from "../assets/img/logo/hedspi-logo.jpg";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 function HideOnScroll(props) {
@@ -50,7 +49,6 @@ export default function NavBar(props) {
             }}
           >
             <div className="flex items-center">
-              <SideBar />
               <NavLink
                 className=" text-white font-medium rounded-md md:text-base lg:text-lg text-xs mx-1 px-3"
                 to="/"
@@ -58,7 +56,7 @@ export default function NavBar(props) {
                 <Avatar alt="" src={logo} />
               </NavLink>
               <NavLink
-                className="m-1  p-1 py-3 block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/"
               >
                 <span className="p-3 px-1">Trang chủ</span>
@@ -68,7 +66,7 @@ export default function NavBar(props) {
                   <div>
                     <span
                       {...bindTrigger(popupState)}
-                      className="cursor-pointer m-1  p-1 py-3  sm:hidden text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2 flex items-center"
+                      className="cursor-pointer m-1  p-1 py-3  sm:hidden text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2 flex items-center"
                     >
                       Menu
                       <ExpandMoreOutlinedIcon />
@@ -91,31 +89,31 @@ export default function NavBar(props) {
                 )}
               </PopupState>
               <NavLink
-                className="m-1  p-1 py-3 hidden sm:block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/documents"
               >
                 <span className="p-3 px-1">Tài liệu</span>
               </NavLink>
               <NavLink
-                className="m-1  p-1 py-3 hidden sm:block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/reviews"
               >
                 <span className="p-3 px-1">Review</span>
               </NavLink>
               <NavLink
-                className="m-1  p-1 py-3 hidden sm:block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/questions"
               >
                 <span className="p-3 px-1">Q&A</span>
               </NavLink>
               <NavLink
-                className="m-1  p-1 py-3 hidden sm:block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/documents/exams"
               >
                 <span className="p-3 px-1">Đề thi</span>
               </NavLink>
               <NavLink
-                className="m-1  p-1 py-3 hidden sm:block text-white hover:bg-gray-300 hover:text-slate-800 font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
+                className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
                 to="/about"
               >
                 <span className="p-3 px-1">About Us</span>
