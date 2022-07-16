@@ -13,13 +13,13 @@ import InfoIcon from "@mui/icons-material/Info";
 
 const Footer = () => {
   return (
-    <div className="p-10 bg-blue-500 flex flex-col w-full">
-      <div className="flex md:justify-between">
-        <a href="/" className="w-1/4 md:w-1/6">
-          <img alt="HEDSPI LOGO" src={logo} className="rounded-full w-fit" />
+    <div className="p-6 md:p-10 bg-main flex flex-col w-full">
+      <div className="flex md:justify-between flex-wrap">
+        <a href="/" className="w-full md:w-1/6 flex items-center justify-center">
+          <img alt="HEDSPI LOGO" src={logo} className="rounded-full w-1/3 md:w-fit" />
         </a>
-        <div className="flex flex-col px-8">
-          <span className="font-semibold text-white text-xl flex items-center py-2">
+        <div className="flex flex-col px-4 w-1/2 md:w-1/3">
+          <span className="font-semibold text-white text-xl flex items-center  py-2">
             <ContactSupportOutlinedIcon /> <span className="pl-2">Contact</span>
           </span>
           <a
@@ -62,7 +62,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col px-8">
+        <div className="flex flex-col px-4 w-1/2 md:w-1/3 pl-20">
           <span className="font-semibold text-white text-xl flex items-center py-2">
             <MenuBookIcon /> <span className="pl-2">Menu</span>
           </span>
@@ -85,14 +85,14 @@ const Footer = () => {
             className="font-semibold text-white flex items-center py-2"
             href="/blogs"
           >
-            <ChatBubbleOutlineIcon /> <span className="pl-2">Blog</span>
+            <ChatBubbleOutlineIcon /> <span className="pl-2">Review</span>
           </a>
           <a
             rel="stylesheet"
             className="font-semibold text-white flex items-center py-2"
             href="/about"
           >
-            <InfoIcon /> <span className="pl-2">About Us</span>
+            <InfoIcon /> <span className="pl-2">Q&A</span>
           </a>
         </div>
       </div>
