@@ -2,6 +2,7 @@ import { Breadcrumbs } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import FilterForm from "../components/FilterForm";
+import SubjectList from "../components/SubjectList";
 import PageLayout from "../layouts/PagesLayout";
 
 const DocumentPage = () => {
@@ -18,7 +19,7 @@ const DocumentPage = () => {
            <FilterForm/>
            </div>
            <div className="sm:w-1/2 md:w-2/3 h-fit py-5">
-            
+            <SubjectList/>
            </div>
         </div>
       </div>
