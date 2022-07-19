@@ -65,17 +65,17 @@ const HomePage = () => {
         </div>
       <div className="p-6 text-center text-3xl font-bold uppercase">Có gì ở VIJA ?</div> 
       <div className="flex flex-wrap justify-center md:flex-nowrap p-9">
-        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between">
+        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between rounded-md">
           <span className="text-xl font-medium">Kho tài liệu, đề thi phong phú</span>
           <img alt="" src={document} className='w-1/2 p-4'/>
           <NavLink to='/documents' className=" p-3 bg-main text-white rounded-3xl hover:bg-cyan-400 hover:text-slate-800 hover:scale-110 transition ease-in-out delay-150 duration-300">Khám phá</NavLink>
         </div>
-        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between">
+        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between rounded-md">
           <span className="text-xl font-medium">Review môn học từ những người đi trước</span>
           <img alt="" src={review} className='w-1/2 p-3 pb-4'/>
           <NavLink to='/reviews' className=" p-3 bg-main text-white rounded-3xl hover:bg-cyan-400 hover:text-slate-800 hover:scale-110 transition ease-in-out delay-150 duration-300">Khám phá</NavLink>
         </div>
-        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between">
+        <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between rounded-md">
           <span className="text-xl font-medium">Giải đáp vướng bận cùng các bậc tiền bối</span>
           <img alt="" src={qa} className='w-1/2 p-3'/>
           <NavLink to='/questions' className=" p-3 bg-main text-white rounded-3xl hover:bg-cyan-400 hover:text-slate-800 hover:scale-110 transition ease-in-out delay-150 duration-300">Khám phá</NavLink>

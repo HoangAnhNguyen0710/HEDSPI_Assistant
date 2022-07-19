@@ -3,10 +3,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor:{
-        'main': '#311B92',
+        'main': '#0C1A2D',
       },
       color:{
-        'main': '#311B92',
+        'main': '#0C1A2D',
       }
     },
   },
