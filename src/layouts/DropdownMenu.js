@@ -99,7 +99,7 @@ const DropdownMenu = () => {
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Add another account
+          Thêm tài liệu/ môn học
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

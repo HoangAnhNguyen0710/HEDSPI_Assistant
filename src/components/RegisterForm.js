@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import axiosClient from "../config/axiosClient";
 
 const RegisterForm = (props) => {
   //   const userRef = useRef();
@@ -43,8 +44,15 @@ const RegisterForm = (props) => {
       setErrMsg("Invalid password confirm !");
     } else {
       setErrMsg("");
+      axiosClient.post('/user', {
+        email:signup.email,
+        username:signup.username,
+        password:signup.password,
+        schoolyear:signup.schoolyear,
+      }).then((res) => console.log(res))
+      .catch((err)=> console.log(err));
     }
-    console.log(signup);
+   
   };
   return (
     <>
