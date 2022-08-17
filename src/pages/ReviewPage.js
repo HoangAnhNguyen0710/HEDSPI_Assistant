@@ -48,7 +48,7 @@ const ReviewPage = () => {
   };
   const ReviewContent = (
     <>
-      <div className="min-h-screen py-20 px-10">
+      <div className="min-h-screen py-16 px-10">
        <Breadcrumbs aria-label="breadcrumb">
             <NavLink to="/" className='text-2xl font-semibold'>
               Reviews

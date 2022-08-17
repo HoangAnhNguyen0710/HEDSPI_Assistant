@@ -21,6 +21,7 @@ import logo from "../assets/img/logo/hedspi-logo.jpg";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import SearchIcon from "@mui/icons-material/Search";
 import DropdownMenu from "./DropdownMenu";
+import Sidebar from "./Sidebar";
 function HideOnScroll(props) {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -104,6 +105,7 @@ export default function NavBar(props) {
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center">
+                <Sidebar/>
                 <NavLink
                   className=" text-white font-medium rounded-md md:text-base lg:text-lg text-xs mx-1 px-3"
                   to="/"
@@ -116,33 +118,7 @@ export default function NavBar(props) {
               >
                 <span className="p-3 px-1">Trang chủ</span>
               </NavLink> */}
-                <PopupState variant="popover" popupId="demo-popup-menu">
-                  {(popupState) => (
-                    <div>
-                      <span
-                        {...bindTrigger(popupState)}
-                        className="cursor-pointer m-1  p-1 py-3  sm:hidden text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2 flex items-center"
-                      >
-                        Menu
-                        <ExpandMoreOutlinedIcon />
-                      </span>
-                      <Menu {...bindMenu(popupState)}>
-                        <MenuItem>
-                          <NavLink to="/documents">Tài liệu</NavLink>
-                        </MenuItem>
-                        <MenuItem>
-                          <NavLink to="/questions">Q&A</NavLink>
-                        </MenuItem>
-                        <MenuItem>
-                          <NavLink to="/reviews">Review</NavLink>
-                        </MenuItem>
-                        <MenuItem>
-                          <NavLink to="/about">About Us</NavLink>
-                        </MenuItem>
-                      </Menu>
-                    </div>
-                  )}
-                </PopupState>
+                
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
                   to="/documents"

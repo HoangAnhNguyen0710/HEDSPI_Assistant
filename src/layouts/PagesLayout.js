@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { MutatingDots } from "react-loader-spinner";
+import Loader from "../slices/loader";
 // import { NavLink } from "react-router-dom";
 
 
@@ -19,6 +20,7 @@ const PageLayout = (props) => {
 
   return (
     <>
+      <Loader/>
       <div className="flex">
         <div className="w-full font-sans">
           <NavBar />
@@ -34,7 +36,9 @@ const PageLayout = (props) => {
               <MutatingDots color="#06b6d4" height={80} width={80} />
             </div>
           ) : (
-            props.page
+            <div className="sm:px-2 md:px-6 lg:px-10">
+            {props.page}
+            </div>
           )}
           <Footer />
         </div>

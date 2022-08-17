@@ -2,6 +2,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import RoomIcon from '@mui/icons-material/Room';
 import { Checkbox, FormControlLabel, FormGroup, FormLabel, InputAdornment, Radio, RadioGroup, TextField } from '@mui/material'
 import React, { useState } from 'react'
+import axios from 'axios';
 
 const FilterForm = (props) => {
   const [filter, setFilter] = useState({
@@ -14,9 +15,16 @@ const FilterForm = (props) => {
   const handleChange = (e) => {
       setFilter({...filter, [e.target.name]: e.target.value});
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.get(`http://localhost:5000/companies/all`)
+    .then((res)=> console.log(res))
+    .catch((err) => console.log(err));
+  }
   return (
     <>
-    <form className='flex flex-col w-full'>
+    <form className='flex flex-col w-full' onSubmit={handleSubmit}>
       <div className='w-full py-3 pb-4'>
       <TextField
           fullWidth
