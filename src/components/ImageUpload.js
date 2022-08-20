@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { storage } from "../config/firebaseConfig";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
-import { DropzoneArea, DropzoneAreaBase } from "material-ui-dropzone";
+import { DropzoneArea } from "material-ui-dropzone";
 const ImageUploader = (props) => {
   const [imageUpload, setImageUpload] = useState([]);
   // const [imageUrls, setImageUrls] = useState([]);

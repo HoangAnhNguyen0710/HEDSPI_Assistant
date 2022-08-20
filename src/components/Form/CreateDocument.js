@@ -2,7 +2,6 @@
 import {
     Button,
   FormControl,
-  FormGroup,
   InputLabel,
   MenuItem,
   Select,
@@ -10,12 +9,12 @@ import {
 } from "@mui/material";
 
 import React from "react";
-import ImageUploader from "./ImageUpload";
+import ImageUploader from "../ImageUpload";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 const defaultDoc = {
     title: "",
-    subject_id: "",
+    subject_code: "",
     subject_name: "",
     program: "",
     author: "Nguyen Hoang Anh",
@@ -44,8 +43,8 @@ const CreateDocumentForm = () => {
   }
 
   return (
-    <div className="w-full sm:w-4/5 lg:w-2/3 m-3">
-      <span className="text-2xl font-medium py-3">Tạo tài liệu</span>
+    <div className="w-full sm:w-2/3 m-3">
+      <span className="py-3 text-2xl font-semibold">Tạo tài liệu</span>
       <form className="py-6" onSubmit={handleSubmit}>
         <div className="flex flex-wrap">
           <TextField
@@ -142,8 +141,8 @@ const CreateDocumentForm = () => {
                 value={document.type}
                 onChange={handleChange}
               >
-                <MenuItem value={8}>Tài liệu môn học</MenuItem>
-                <MenuItem value={7}>Đề thi</MenuItem>
+                <MenuItem value="Tài liệu môn học">Tài liệu môn học</MenuItem>
+                <MenuItem value="Đề thi">Đề thi</MenuItem>
               </Select>
             </FormControl>
           </div>

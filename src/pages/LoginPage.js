@@ -1,6 +1,6 @@
 import React from 'react'
 import working from '../assets/img/working.jpg';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/Form/LoginForm';
 import { useState } from 'react';
 import RegisterForm from '../components/RegisterForm';
 

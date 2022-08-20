@@ -45,16 +45,16 @@ const Question = (props) => {
           </Menu>
         </div>
         <div className="py-3 text-xs opacity-80">
-          <span>{question.author}</span> • <span>{question.date_created}</span>
+          <span>{question.author}</span> • <span>{question.createdAt}</span>
         </div>
       </div>
       <div className="p-3 py-0 flex flex-col sm:flex-row">
-        {question.cat_name.map((cat_name)=> <span className="px-1 py-2">
+        {question.topic.map((topic)=> <span className="px-1 py-2" key={topic.toString()}>
           <a
           href="/"
           className="px-3 py-2 rounded-md text-xs bg-main text-white w-fit"
         >
-          <ComputerOutlinedIcon /> {cat_name}
+          <ComputerOutlinedIcon /> {topic}
         </a>
         </span>)}
        
@@ -65,11 +65,11 @@ const Question = (props) => {
         </span>
       </div>
       <span className="p-3 flex items-center">
-        <RemoveRedEyeIcon /> <span className="px-1">{question.seen_num}</span>
+        <RemoveRedEyeIcon /> <span className="px-1">{question.views}</span>
         <span className="px-2"></span>
-        <FavoriteIcon/> <span className="px-1">{question.likes_num}</span>
+        <FavoriteIcon/> <span className="px-1">{question.likes}</span>
         <span className="px-2"></span>
-        <ChatBubbleIcon/> <span className="px-1">{question.comments_num}</span>
+        <ChatBubbleIcon/> <span className="px-1">{question.CommentNum}</span>
       </span>
     </div>
   );

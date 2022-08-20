@@ -17,22 +17,22 @@ const DocumentList = () => {
   }
   return (
     <div className='flex w-full flex-wrap p-3'>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
-        <div className='w-full flex items-center justify-center md:w-1/2 py-3 h-full'>
+        <div className='w-full flex items-center justify-center lg:w-1/2 py-3 h-full'>
             <Document document={document}/>
         </div>
     </div>

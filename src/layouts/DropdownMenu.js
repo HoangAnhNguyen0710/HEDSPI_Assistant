@@ -99,7 +99,7 @@ const DropdownMenu = () => {
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Thêm tài liệu/ môn học
+          <NavLink to='/create_docs'>Thêm tài liệu</NavLink>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

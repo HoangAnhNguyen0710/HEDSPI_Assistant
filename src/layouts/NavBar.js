@@ -2,23 +2,17 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-// import InputBase from "@mui/material/InputBase";
-// import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
 import {
   Avatar,
-  Menu,
-  MenuItem,
   Slide,
   styled,
   useScrollTrigger,
 } from "@mui/material";
 import { alpha, InputBase } from "@mui/material";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import PropTypes from "prop-types";
 import logo from "../assets/img/logo/hedspi-logo.jpg";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import SearchIcon from "@mui/icons-material/Search";
 import DropdownMenu from "./DropdownMenu";
 import Sidebar from "./Sidebar";
@@ -107,47 +101,41 @@ export default function NavBar(props) {
               <div className="flex items-center">
                 <Sidebar/>
                 <NavLink
-                  className=" text-white font-medium rounded-md md:text-base lg:text-lg text-xs mx-1 px-3"
+                  className=" text-white font-medium rounded-md md:text-bxse lg:text-lg text-xs mx-1 p1-3"
                   to="/"
                 >
                   <Avatar alt="" src={logo} />
                 </NavLink>
-                {/* <NavLink
-                className="m-1  p-1 py-3 block text-white no-underline hover:underline font-medium rounded-md md:text-base lg:text-lg text-xs md:p-3 md:m-2"
-                to="/"
-              >
-                <span className="p-3 px-1">Trang chủ</span>
-              </NavLink> */}
-                
+             
                 <NavLink
-                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
+                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/documents"
                 >
-                  <span className="p-3 px-1">Tài liệu</span>
+                  <div className="p-3 px-1">Tài liệu</div>
                 </NavLink>
                 <NavLink
-                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
+                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/reviews"
                 >
-                  <span className="p-3 px-1">Review</span>
+                  <div className="p-3 px-1">Review</div>
                 </NavLink>
                 <NavLink
-                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
+                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/questions"
                 >
-                  <span className="p-3 px-1">Q&A</span>
+                  <div className="p-3 px-1">Q&A</div>
                 </NavLink>
                 <NavLink
-                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
+                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/documents/exams"
                 >
-                  <span className="p-3 px-1">Đề thi</span>
+                  <div className="p-3 px-1">Đề thi</div>
                 </NavLink>
                 <NavLink
-                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-sm lg:text-base text-xs md:p-2 md:m-2 lg:p-3"
+                  className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/about"
                 >
-                  <span className="p-3 px-1">About Us</span>
+                  <div className="p-3 px-1">About Us</div>
                 </NavLink>
               </div>
               <div className="flex items-center pr-3">
