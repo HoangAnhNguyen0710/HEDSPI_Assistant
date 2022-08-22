@@ -1,11 +1,10 @@
 import React from "react";
 import PageLayout from "../layouts/PagesLayout";
-import { useState, useEffect } from "react";
-import { storage } from "../config/firebaseConfig";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
+// import { useState, useEffect } from "react";
+// import { storage } from "../config/firebaseConfig";
+// import { ref, listAll, getDownloadURL } from "firebase/storage";
 // import { v4 } from "uuid";
 // import ImageUploader from "../components/ImageUpload";
-import CreateDocumentForm from "../components/CreateDocument";
 const AboutUsPage = () => {
   // const [imageList, setImageList] = useState([]);
   // const imageListRef = ref(storage, "/images")
@@ -23,9 +22,9 @@ const AboutUsPage = () => {
   const AboutContent = (
     <>
       <div className="min-h-screen py-20">
-        <div className="flex items-center justify-center">
+        {/* <div className="flex items-center justify-center">
         <CreateDocumentForm/>
-        </div>
+        </div> */}
         {/* {imageList.map((url)=> {
           return <img src={url} alt=""/>
         })} */}

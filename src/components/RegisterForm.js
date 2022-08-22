@@ -44,15 +44,16 @@ const RegisterForm = (props) => {
       setErrMsg("Invalid password confirm !");
     } else {
       setErrMsg("");
-      axiosClient.post('/user', {
-        email:signup.email,
-        username:signup.username,
-        password:signup.password,
-        schoolyear:signup.schoolyear,
-      }).then((res) => console.log(res))
-      .catch((err)=> console.log(err));
+      axiosClient
+        .post("/user", {
+          email: signup.email,
+          username: signup.username,
+          password: signup.password,
+          schoolyear: signup.schoolyear,
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
-   
   };
   return (
     <>

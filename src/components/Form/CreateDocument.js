@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 import {
-    Button,
+  Button,
   FormControl,
-  FormGroup,
   InputLabel,
   MenuItem,
   Select,
@@ -10,42 +10,54 @@ import {
 } from "@mui/material";
 
 import React from "react";
-import ImageUploader from "./ImageUpload";
-import { useState } from "react";
+import ImageUploader from "../ImageUpload";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const defaultDoc = {
-    title: "",
-    subject_id: "",
-    subject_name: "",
-    program: "",
-    author: "Nguyen Hoang Anh",
-    lecturer: "",
-    description: "",
-    semester: 1,
-    type: "",
-    likes: 0,
-    views: 0,
-    rating: 0,
-}
+  title: "",
+  subject_code: "",
+  subject_name: "",
+  program: "",
+  author: "Nguyen Hoang Anh",
+  lecturer: "",
+  description: "",
+  semester: 1,
+  type: "",
+  likes: 0,
+  views: 0,
+  rating: 0,
+};
+
 const CreateDocumentForm = () => {
+  const navigate = useNavigate();
   const [document, setDocument] = useState(defaultDoc);
   const [uploadIMG, setUploadIMG] = useState(false);
-  const subjectList = useSelector((state)=> state.subject.value);
-//   console.log(subjectList);
+  const subjectList = useSelector((state) => state.subject.value);
+  const [isUploaded, setIsUploaded] = useState(false);
+  //   console.log(subjectList);
   const handleChange = (e) => {
-     setDocument({ ...document, [e.target.name]: e.target.value })
-  }
+    setDocument({ ...document, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    // setDocument(defaultDoc);
+    if(isUploaded){
+      alert("Đăng tài liệu thành công !");
+      navigate("/");
+    }
+  }, [isUploaded]);
 
   const handleSubmit = (e) => {
-     e.preventDefault();
-    //  console.log(document);
-     setUploadIMG(!uploadIMG);
-     setDocument(defaultDoc);
-  }
+    e.preventDefault();
+    console.log(document);
+    setUploadIMG(!uploadIMG);
+    //  setDocument(defaultDoc);
+  };
 
   return (
-    <div className="w-full sm:w-4/5 lg:w-2/3 m-3">
-      <span className="text-2xl font-medium py-3">Tạo tài liệu</span>
+    <div className="w-full sm:w-2/3 m-3">
+      <span className="py-3 text-2xl font-semibold">Tạo tài liệu</span>
       <form className="py-6" onSubmit={handleSubmit}>
         <div className="flex flex-wrap">
           <TextField
@@ -56,7 +68,7 @@ const CreateDocumentForm = () => {
             id="fullWidth"
             htmlFor="component-outlined"
             size="small"
-            sx={{mb:2}}
+            sx={{ mb: 2 }}
             onChange={handleChange}
           />
           <div className="w-1/2 md:w-1/5 mb-4 pr-3">
@@ -88,24 +100,26 @@ const CreateDocumentForm = () => {
                 onChange={handleChange}
                 value={document.subject_name}
               >
-                {subjectList.map((subject)=> 
-                <MenuItem key={subject.id} value={subject.name}>{subject.name}</MenuItem>
-                )}
+                {subjectList.map((subject) => (
+                  <MenuItem key={subject.id} value={subject.name}>
+                    {subject.name}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
           <div className="w-full md:w-1/5 md:pl-3">
-          <TextField
-            fullWidth
-            label="Giảng viên"
-            id="fullWidth"
-            htmlFor="component-outlined"
-            size="small"
-            sx={{mb:2}}
-            name="lecturer"
-            value={document.lecturer}
-            onChange={handleChange}
-          />
+            <TextField
+              fullWidth
+              label="Giảng viên"
+              id="fullWidth"
+              htmlFor="component-outlined"
+              size="small"
+              sx={{ mb: 2 }}
+              name="lecturer"
+              value={document.lecturer}
+              onChange={handleChange}
+            />
           </div>
           <div className="w-1/2 mb-4 pr-3">
             <FormControl size="small" fullWidth>
@@ -142,26 +156,36 @@ const CreateDocumentForm = () => {
                 value={document.type}
                 onChange={handleChange}
               >
-                <MenuItem value={8}>Tài liệu môn học</MenuItem>
-                <MenuItem value={7}>Đề thi</MenuItem>
+                <MenuItem value="Tài liệu môn học">Tài liệu môn học</MenuItem>
+                <MenuItem value="Đề thi">Đề thi</MenuItem>
               </Select>
             </FormControl>
           </div>
         </div>
-        <ImageUploader upload = {uploadIMG} setUpload = {setUploadIMG} subject_name = {document.subject_name} author = {document.author}/>
-      <div className="my-4 w-full">
-      <TextField
-          id="outlined-multiline-static"
-          label="Mô tả"
-          multiline
-          rows={5}
-          fullWidth
-          name="description"
-          value={document.description}
-          onChange={handleChange}
+        <ImageUploader
+          upload={uploadIMG}
+          setUpload={setUploadIMG}
+          document={document}
+          isUploaded={isUploaded}
+          setIsUploaded={setIsUploaded}
         />
-      </div>
-      <div className=""><Button variant="contained" type="submit">Tạo tài liệu</Button></div>
+        <div className="my-4 w-full">
+          <TextField
+            id="outlined-multiline-static"
+            label="Mô tả"
+            multiline
+            rows={5}
+            fullWidth
+            name="description"
+            value={document.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="">
+          <Button variant="contained" type="submit">
+            Tạo tài liệu
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import FilterForm from "../components/FilterForm";
+import FilterForm from "../components/Form/FilterForm";
 import PageLayout from "../layouts/PagesLayout";
 import { useState } from "react";
 import DocumentList from "../components/DocumentList";
@@ -23,26 +23,28 @@ const DocumentPage = () => {
       <div className="min-h-screen py-16 px-10">
         <div className="flex items-center justify-between w-full">
           <Breadcrumbs aria-label="breadcrumb">
-            <NavLink to="/" className="text-2xl font-semibold p-3 m-3 mt-0 mr-0 sm:p-0 sm:m-0">
+            <NavLink
+              to="/"
+              className="text-2xl font-semibold p-3 m-3 mt-0 mr-0 sm:p-0 sm:m-0"
+            >
               Tài liệu
             </NavLink>
           </Breadcrumbs>
           <div className="p-1">
-          <FormControl size="small" sx={{ m: 1, minWidth: 150 }} >
-            <InputLabel id="demo-simple-select-label">Sort</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              
-              value={sort}
-              label="Sort"
-              onChange={handleChange}
-            >
-              <MenuItem value="Latest">Mới nhất</MenuItem>
-              <MenuItem value="Oldest">Cũ nhất</MenuItem>
-              <MenuItem value="Trending">Phổ biến nhất</MenuItem>
-            </Select>
-          </FormControl>
+            <FormControl size="small" sx={{ m: 1, minWidth: 150 }}>
+              <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={sort}
+                label="Sort"
+                onChange={handleChange}
+              >
+                <MenuItem value="Latest">Mới nhất</MenuItem>
+                <MenuItem value="Oldest">Cũ nhất</MenuItem>
+                <MenuItem value="Trending">Phổ biến nhất</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
 

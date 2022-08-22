@@ -15,8 +15,15 @@ const Footer = () => {
   return (
     <div className="p-6 md:p-10 bg-main flex flex-col w-full">
       <div className="flex md:justify-between flex-wrap">
-        <a href="/" className="w-full md:w-1/6 flex items-center justify-center">
-          <img alt="HEDSPI LOGO" src={logo} className="rounded-full w-1/3 md:w-fit" />
+        <a
+          href="/"
+          className="w-full md:w-1/6 flex items-center justify-center"
+        >
+          <img
+            alt="HEDSPI LOGO"
+            src={logo}
+            className="rounded-full w-1/3 md:w-fit"
+          />
         </a>
         <div className="flex flex-col px-4 w-1/2 md:w-1/3">
           <span className="font-semibold text-white text-xl flex items-center  py-2">
