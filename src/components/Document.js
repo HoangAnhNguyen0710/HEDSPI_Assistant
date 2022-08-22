@@ -4,8 +4,8 @@ import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Menu, MenuItem } from "@mui/material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarIcon from '@mui/icons-material/Star';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import StarIcon from "@mui/icons-material/Star";
 
 const Document = (props) => {
   const document = props.document;
@@ -64,9 +64,9 @@ const Document = (props) => {
       <span className="p-3 flex items-center">
         <RemoveRedEyeIcon /> <span className="px-1">{document.seen_num}</span>
         <span className="px-2"></span>
-        <FavoriteIcon/> <span className="px-1">{document.likes_num}</span>
+        <FavoriteIcon /> <span className="px-1">{document.likes_num}</span>
         <span className="px-2"></span>
-        <StarIcon/> <span className="px-1">{document.rating}/5</span>
+        <StarIcon /> <span className="px-1">{document.rating}/5</span>
       </span>
     </div>
   );

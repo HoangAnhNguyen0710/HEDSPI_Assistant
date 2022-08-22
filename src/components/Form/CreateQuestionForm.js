@@ -37,9 +37,8 @@ const CreateQuestionForm = (props) => {
   //quản lý submit form
   const [confirm, setConfirm] = useState(false);
 
-
   const handleCloseSnackBar = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackBar(false);
@@ -51,44 +50,46 @@ const CreateQuestionForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      if(confirm === true){
-        const uploadQ = question;
-        uploadQ.topic = topicList;
-        // setQuestion(uploadQ);
-        axiosClient.post(`/question`, uploadQ)
-        .then((res)=> {
+    if (confirm === true) {
+      const uploadQ = question;
+      uploadQ.topic = topicList;
+      // setQuestion(uploadQ);
+      axiosClient
+        .post(`/question`, uploadQ)
+        .then((res) => {
           console.log(res);
           setMSGType("success");
-          setMSG("Tạo câu hỏi thành công !")
+          setMSG("Tạo câu hỏi thành công !");
           setOpenSnackBar(true);
           // props.setOpen(false);
         })
         .catch((err) => console.log(err));
-        setQuestion(defaultQ);
-        setTopicList([]);
-        setConfirm(false);
-      }
+      setQuestion(defaultQ);
+      setTopicList([]);
+      setConfirm(false);
+    }
   };
 
   const addTopicToList = () => {
     if (
       topicList.filter((topic) => topic === addTopic).length === 0 &&
-      topicList.length < 5 && addTopic !== ""
+      topicList.length < 5 &&
+      addTopic !== ""
     ) {
       setTopicList([...topicList, addTopic]);
       setAddTopic("");
       return;
     }
-    if(topicList.length === 5) {
+    if (topicList.length === 5) {
       setMSGType("error");
       setMSG("Số topic tối đa là 5!");
       setOpenSnackBar(true);
-    };
-    if(addTopic === ""){
+    }
+    if (addTopic === "") {
       setMSGType("error");
       setMSG("Topic không hợp lệ!");
       setOpenSnackBar(true);
-    } 
+    }
   };
 
   const handleDeleteTopic = (topic) => {
@@ -179,16 +180,27 @@ const CreateQuestionForm = (props) => {
           />
         </div>
         <div className="">
-          <Button variant="contained" type="submit" onClick={()=>setConfirm(true)}>
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={() => setConfirm(true)}
+          >
             Tạo câu hỏi
           </Button>
         </div>
       </form>
-      <Snackbar open={openSnackBar} autoHideDuration={3000} onClose={handleCloseSnackBar}>
-      <Message severity={MSGType} sx={{ width: '100%' }} onClose={handleCloseSnackBar}>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackBar}
+      >
+        <Message
+          severity={MSGType}
+          sx={{ width: "100%" }}
+          onClose={handleCloseSnackBar}
+        >
           {MSG}
-      </Message>
-
+        </Message>
       </Snackbar>
     </div>
   );

@@ -4,13 +4,12 @@ import { NavLink } from "react-router-dom";
 // import FilterForm from "../components/FilterForm";
 import ReviewList from "../components/ReviewList";
 import PageLayout from "../layouts/PagesLayout";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
 
@@ -49,44 +48,59 @@ const ReviewPage = () => {
   const ReviewContent = (
     <>
       <div className="min-h-screen py-16 px-10">
-       <Breadcrumbs aria-label="breadcrumb">
-            <NavLink to="/" className='text-2xl font-semibold'>
-              Reviews
-            </NavLink>
+        <Breadcrumbs aria-label="breadcrumb">
+          <NavLink to="/" className="text-2xl font-semibold">
+            Reviews
+          </NavLink>
         </Breadcrumbs>
         <div className="flex">
-      <div className="w-full sm:w-1/3 md:w-1/5 h-fit py-5">
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
-      >
-        <Tab label="Tất cả" {...a11yProps(0)} sx={{alignItems:"start",textAlign:"start", pl: 0}}/>
-        <Tab label="Review học phần" {...a11yProps(1)} sx={{alignItems:"start",textAlign:"start", pl: 0}}/>
-        <Tab label="Review học kì" {...a11yProps(2)} sx={{alignItems:"start",textAlign:"start", pl: 0}}/>
-        <Tab label="Review khác" {...a11yProps(3)} sx={{alignItems:"start",textAlign:"start", pl: 0}}/>
-      </Tabs>
+          <div className="w-full sm:w-1/3 md:w-1/5 h-fit py-5">
+            <Tabs
+              orientation="vertical"
+              variant="scrollable"
+              value={value}
+              onChange={handleChange}
+              aria-label="Vertical tabs example"
+              sx={{ borderRight: 1, borderColor: "divider" }}
+            >
+              <Tab
+                label="Tất cả"
+                {...a11yProps(0)}
+                sx={{ alignItems: "start", textAlign: "start", pl: 0 }}
+              />
+              <Tab
+                label="Review học phần"
+                {...a11yProps(1)}
+                sx={{ alignItems: "start", textAlign: "start", pl: 0 }}
+              />
+              <Tab
+                label="Review học kì"
+                {...a11yProps(2)}
+                sx={{ alignItems: "start", textAlign: "start", pl: 0 }}
+              />
+              <Tab
+                label="Review khác"
+                {...a11yProps(3)}
+                sx={{ alignItems: "start", textAlign: "start", pl: 0 }}
+              />
+            </Tabs>
+          </div>
+          <div className="sm:w-2/3 md:w-4/5 h-fit py-5">
+            <TabPanel value={value} index={0}>
+              <ReviewList />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <ReviewList />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <ReviewList />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              <ReviewList />
+            </TabPanel>
+          </div>
+        </div>
       </div>
-      <div className="sm:w-2/3 md:w-4/5 h-fit py-5">
-      <TabPanel value={value} index={0}>
-        <ReviewList/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ReviewList/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <ReviewList/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <ReviewList/>
-      </TabPanel>
-      </div>
-      </div>
-      </div>
-     
     </>
   );
   return <PageLayout page={ReviewContent} />;

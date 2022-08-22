@@ -1,7 +1,5 @@
 import {
   Breadcrumbs,
-  Button,
-  ButtonGroup,
   Dialog,
   DialogContent,
   Divider,
@@ -12,7 +10,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import PageLayout from "../layouts/PagesLayout";
 import AddIcon from "@mui/icons-material/Add";
-import QuestionList from "../components/QuestionList";
+// import QuestionList from "../components/QuestionList";
 import Question from "../components/Question";
 import CreateQuestionForm from "../components/Form/CreateQuestionForm";
 import { useEffect } from "react";
@@ -20,11 +18,12 @@ import axiosClient from "../config/axiosClient";
 
 const QAPage = () => {
   const [questionList, setQuestionList] = useState(null);
-  useEffect(()=>{
-    axiosClient.get('/question/all')
-    .then((res) => setQuestionList(res.data))
-    .catch((err) => console.log(err));
-  },[])
+  useEffect(() => {
+    axiosClient
+      .get("/question/all")
+      .then((res) => setQuestionList(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const [alignment, setAlignment] = React.useState("left");
   const [open, setOpen] = React.useState(false);
@@ -94,15 +93,19 @@ const QAPage = () => {
           </div>
         </div>
       </div>
-      {questionList !== null ? questionList.map((question) => 
-      <div className="mr-6 mx-6 pr-7 pb-5" key={question.id}>
-      <Question question={question} />
-      </div>
-      ) : <></>}
+      {questionList !== null ? (
+        questionList.map((question) => (
+          <div className="mr-6 mx-6 pr-7 pb-5" key={question.id}>
+            <Question question={question} />
+          </div>
+        ))
+      ) : (
+        <></>
+      )}
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogContent>
           <div className="flex items-center justify-center">
-            <CreateQuestionForm setOpen={setOpen}/>
+            <CreateQuestionForm setOpen={setOpen} />
           </div>
         </DialogContent>
       </Dialog>

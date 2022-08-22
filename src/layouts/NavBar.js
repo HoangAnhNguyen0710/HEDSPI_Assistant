@@ -4,12 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
-import {
-  Avatar,
-  Slide,
-  styled,
-  useScrollTrigger,
-} from "@mui/material";
+import { Avatar, Slide, styled, useScrollTrigger } from "@mui/material";
 import { alpha, InputBase } from "@mui/material";
 import PropTypes from "prop-types";
 import logo from "../assets/img/logo/hedspi-logo.jpg";
@@ -99,14 +94,14 @@ export default function NavBar(props) {
           >
             <div className="flex items-center justify-between w-full">
               <div className="flex items-center">
-                <Sidebar/>
+                <Sidebar />
                 <NavLink
                   className=" text-white font-medium rounded-md md:text-bxse lg:text-lg text-xs mx-1 p1-3"
                   to="/"
                 >
                   <Avatar alt="" src={logo} />
                 </NavLink>
-             
+
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/documents"
@@ -154,16 +149,16 @@ export default function NavBar(props) {
                   />
                 </Search>
                 {isLogin ? (
-              <DropdownMenu/>
-            ) : (
-              <NavLink
-                className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 "
-                to="/login"
-              >
-                <NotificationsNoneOutlinedIcon />
-                <span className="pl-2">Login</span>
-              </NavLink>
-            )}
+                  <DropdownMenu />
+                ) : (
+                  <NavLink
+                    className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 "
+                    to="/login"
+                  >
+                    <NotificationsNoneOutlinedIcon />
+                    <span className="pl-2">Login</span>
+                  </NavLink>
+                )}
               </div>
             </div>
           </Toolbar>

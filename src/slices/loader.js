@@ -1,25 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { useEffect } from "react";
-import axiosClient from "../config/axiosClient";
 import { setSubjects } from "./subjects";
 import { MutatingDots } from "react-loader-spinner";
 import { setQuestions } from "./question";
+import { getAllSubject, getQuestion } from "../service/api";
 // import { useSelector } from "react-redux/es/exports";
 const Loader = (props) => {
   // const subject = useSelector((state)=> state.subject.value);
   const dispatch = useDispatch();
   useEffect(() => {
-    axiosClient.get("/subject/all")
-    .then((res) => {
+    getAllSubject.then((res) => {
       const subject = res.data;
       dispatch(setSubjects(subject));
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   useEffect(()=>{
-    axiosClient.get('/question/all')
+    getQuestion(1, 6)
     .then((res) => dispatch(setQuestions(res.data)))
     .catch((err) => console.log(err));
   },[])
