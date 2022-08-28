@@ -10,26 +10,59 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import PageLayout from "../layouts/PagesLayout";
 import AddIcon from "@mui/icons-material/Add";
-// import QuestionList from "../components/QuestionList";
 import Question from "../components/Question";
 import CreateQuestionForm from "../components/Form/CreateQuestionForm";
 import { useEffect } from "react";
-import axiosClient from "../config/axiosClient";
+import { getQuestion, getQuestionNum } from "../service/api";
+import { setQuestions } from "../slices/question";
+import { useDispatch, useSelector } from "react-redux";
+import PagePagination from "../layouts/Pagination";
 
 const QAPage = () => {
-  const [questionList, setQuestionList] = useState(null);
-  useEffect(() => {
-    axiosClient
-      .get("/question/all")
-      .then((res) => setQuestionList(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
+  const questionList = useSelector((state) => state.question.value);
+  const dispatch = useDispatch();
+  const [numOfPages, setNumOfPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoader, setIsLoader] = useState(true);
   const [alignment, setAlignment] = React.useState("left");
   const [open, setOpen] = React.useState(false);
+  const [sort, setSort] = useState({
+    createdAt: "DESC"
+  });
+
+  useEffect(() => {
+    getQuestion(currentPage, parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE), sort)
+      .then((res) => {
+        dispatch(setQuestions(res.data));
+        setIsLoader(false);
+      })
+      .catch((err) => console.log(err));
+      getQuestionNum.then((res)=> setNumOfPages(res.data/parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE)));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[currentPage, alignment])
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
+    setCurrentPage(1);
+    switch(newAlignment){
+      case "center":
+        setSort({
+          createdAt: "ASC",
+          // likes: ""
+        });
+        break;
+      case "right":
+        setSort({
+          // createdAt: "",
+          likes: "DESC"
+        });
+        break;
+      default:
+        setSort({
+          createdAt: "DESC",
+        });
+        break;
+    }
   };
 
   const handleOpenDialog = () => {
@@ -73,26 +106,28 @@ const QAPage = () => {
                 aria-label="left aligned"
                 sx={{ paddingY: 1, paddingX: 2 }}
               >
-                <span className="text-black text-sm">GẦN ĐÂY</span>
+                <span className="text-black text-sm">MỚI NHẤT</span>
               </ToggleButton>
               <ToggleButton
                 value="center"
                 aria-label="centered"
                 sx={{ paddingY: 1, paddingX: 2 }}
               >
-                <span className="text-black text-sm">NỔI BẬT</span>
+                <span className="text-black text-sm">CŨ NHẤT</span>
               </ToggleButton>
               <ToggleButton
                 value="right"
                 aria-label="right aligned"
                 sx={{ paddingY: 1, paddingX: 2 }}
               >
-                <span className="text-black text-sm">NGẪU NHIÊN</span>
+                <span className="text-black text-sm">NỔI BẬT</span>
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
         </div>
       </div>
+      <div className="h-full flex flex-col justify-between">
+      <div>
       {questionList !== null ? (
         questionList.map((question) => (
           <div className="mr-6 mx-6 pr-7 pb-5" key={question.id}>
@@ -102,6 +137,9 @@ const QAPage = () => {
       ) : (
         <></>
       )}
+      </div>
+      <PagePagination totalPage = {numOfPages} setPageNum={setCurrentPage} currentPage={currentPage}/>
+      </div>
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogContent>
           <div className="flex items-center justify-center">
@@ -111,7 +149,7 @@ const QAPage = () => {
       </Dialog>
     </>
   );
-  return <PageLayout page={QAContent} />;
+  return <PageLayout page={QAContent} isLoader={isLoader} />;
 };
 
 export default QAPage;

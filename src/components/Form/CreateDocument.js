@@ -12,14 +12,15 @@ import {
 import React from "react";
 import ImageUploader from "../ImageUpload";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAllSubject, postDocument } from "../../service/api";
+import { setSubjects } from "../../slices/subjects";
 const defaultDoc = {
   title: "",
-  subject_code: "",
-  subject_name: "",
+  subject: Object,
   program: "",
-  author: "Nguyen Hoang Anh",
+  author: null,
   lecturer: "",
   description: "",
   semester: 1,
@@ -33,13 +34,18 @@ const CreateDocumentForm = () => {
   const navigate = useNavigate();
   const [document, setDocument] = useState(defaultDoc);
   const [uploadIMG, setUploadIMG] = useState(false);
+
   const subjectList = useSelector((state) => state.subject.value);
   const [isUploaded, setIsUploaded] = useState(false);
+  const dispatch = useDispatch();
   //   console.log(subjectList);
   const handleChange = (e) => {
     setDocument({ ...document, [e.target.name]: e.target.value });
   };
 
+  const handleChangeSubject = (value) => {
+    setDocument({ ...document, "subject": value });
+  };
   useEffect(() => {
     // setDocument(defaultDoc);
     if(isUploaded){
@@ -48,10 +54,16 @@ const CreateDocumentForm = () => {
     }
   }, [isUploaded]);
 
+  useEffect(()=>{
+    getAllSubject.then((res)=> dispatch(setSubjects(res.data)));
+  }, [])
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(document);
     setUploadIMG(!uploadIMG);
+    postDocument(document)
+    .then((res)=> console.log(res))
+    .catch((err) => console.log(err));
+    setIsUploaded(true);
     //  setDocument(defaultDoc);
   };
 
@@ -97,11 +109,11 @@ const CreateDocumentForm = () => {
                 fullWidth
                 label="Học phần"
                 name="subject_name"
-                onChange={handleChange}
-                value={document.subject_name}
+                // onChange={handleChange}
+                value={document.subject.name}
               >
                 {subjectList.map((subject) => (
-                  <MenuItem key={subject.id} value={subject.name}>
+                  <MenuItem key={subject.id} value={subject.name} onClick={()=> handleChangeSubject(subject)}>
                     {subject.name}
                   </MenuItem>
                 ))}

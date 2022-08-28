@@ -1,7 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "../slices/loader";
 // import { NavLink } from "react-router-dom";
 
