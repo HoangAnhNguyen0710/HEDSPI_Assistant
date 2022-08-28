@@ -11,32 +11,41 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import StarIcon from "@mui/icons-material/Star";
+import moment from "moment";
 
 const Review = (props) => {
   const review = props.review;
 
   return (
-    <div className="w-full my-6 mx-4 mt-0 pb-3 p-2 rounded-lg border border-gray-300 flex flex-col">
-      <div className="p-3 px-6 flex items-center">
-        <Avatar sx={{ width: 32, height: 32 }} src={avatar}></Avatar>
-        <div className="text-sm flex flex-col px-3 w-full">
-          <span className="font-semibold">{review.author}</span>
-          <span className="font-normal opacity-60">
-            {review.author_schoolyear}
-          </span>
-        </div>
-        {/* <span className='p-3 rounded-md bg-purple-400 text-white text-xs'>Đại cương</span> */}
-      </div>
-      <div className="py-3 px-6 flex">
-        <a
-          href="/"
-          className="px-2 py-1 rounded-md text-xs bg-main text-white w-fit"
-        >
-          <ComputerOutlinedIcon /> {review.article}
-        </a>
-        <span className="mx-2 px-1 py-1 rounded-md text-xs bg-gray-400 text-white w-fit flex items-center">
-          <SchoolOutlinedIcon /> <span className="px-2">Kì {review.time}</span>
+    <div className="w-full ml-3 my-6 mt-0 pb-3 p-2 rounded-lg border border-gray-300 flex flex-col">
+      <div className=" px-6 flex items-center">
+        <div className="text-sm flex flex-col w-full">
+          <span className="font-semibold py-1 uppercase">{review.title}</span>
+        <span className="flex text-xs opacity-60 py-1">
+          {review.author !== null ? (
+            <>
+              <div className="text-sm flex flex-col px-3 w-full">
+                <span className="font-semibold">
+                  {review.author.name} {review.author.schoolyear}
+                </span>
+              </div>
+            </>
+          ) : (
+            <>Nguyen Hoang Anh</>
+          )}
+          <span className="px-1">-- {moment(review.createdAt).format(('MMMM Do YYYY, h:mm:ss a'))}</span>
         </span>
+        </div>
+      </div>
+      <div className=" px-6 flex flex-wrap">
+        {review.topic.map((topic) => (
+          <span
+            className="px-2 py-1 ml-0 m-2 bg-main text-white w-fit rounded-md text-sm"
+            key={topic.toString()}
+          >
+            <ComputerOutlinedIcon /> {topic}
+          </span>
+        ))}
       </div>
 
       <div className=" px-3">
@@ -46,7 +55,7 @@ const Review = (props) => {
             <span className="px-2">{review.description}</span>
           </p>
         </div>
-        <span className="p-3 flex items-center">
+        <span className="p-3 pt-2 pb-0 flex items-center">
           <RemoveRedEyeIcon /> <span className="px-1">{review.seen_num}</span>
           <span className="px-2"></span>
           <FavoriteIcon /> <span className="px-1">{review.likes_num}</span>

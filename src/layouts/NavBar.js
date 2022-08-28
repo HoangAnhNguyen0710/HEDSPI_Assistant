@@ -106,31 +106,31 @@ export default function NavBar(props) {
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/documents"
                 >
-                  <div className="p-3 px-1">Tài liệu</div>
+                  <div className="p-1 px-1">Tài liệu</div>
                 </NavLink>
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/reviews"
                 >
-                  <div className="p-3 px-1">Review</div>
+                  <div className="p-1 px-1">Review</div>
                 </NavLink>
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/questions"
                 >
-                  <div className="p-3 px-1">Q&A</div>
+                  <div className="p-1 px-1">Q&A</div>
                 </NavLink>
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/documents/exams"
                 >
-                  <div className="p-3 px-1">Đề thi</div>
+                  <div className="p-1 px-1">Đề thi</div>
                 </NavLink>
                 <NavLink
                   className="m-1  p-1 py-3 hidden sm:block text-white no-underline hover:underline font-medium rounded-md  md:text-xs lg:text-base text-xs md:p-1 md:m-2 lg:p-3"
                   to="/about"
                 >
-                  <div className="p-3 px-1">About Us</div>
+                  <div className="p-1 px-1">About Us</div>
                 </NavLink>
               </div>
               <div className="flex items-center pr-3">

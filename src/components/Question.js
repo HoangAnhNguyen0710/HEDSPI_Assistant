@@ -7,6 +7,7 @@ import { Menu, MenuItem } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import moment from "moment/moment";
 const Question = (props) => {
   const question = props.question;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +23,7 @@ const Question = (props) => {
       <div className="p-3 py-1 flex flex-col">
         <div className="text-base font-semibold flex justify-between w-full">
           <a href="/">
-            <QuestionMarkIcon /> {question.title}
+            <span className="uppercase"><QuestionMarkIcon /> {question.title}</span>
           </a>
           <button
             id="basic-button"
@@ -47,7 +48,7 @@ const Question = (props) => {
           </Menu>
         </div>
         <div className="py-3 text-xs opacity-80">
-          <span>{question.author}</span> • <span>{question.createdAt}</span>
+          <span>{question.author}</span> • <span>{moment(question.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</span>
         </div>
       </div>
       <div className="p-3 py-0 flex flex-col sm:flex-row flex-wrap">

@@ -15,10 +15,11 @@ import { NavLink } from "react-router-dom";
 import DocumentList from "../components/DocumentList";
 import QuestionList from "../components/QuestionList";
 import { useEffect } from "react";
-import { getQuestion } from "../service/api";
+import { getDocument, getQuestion } from "../service/api";
 import { setQuestions } from "../slices/question";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { setDocs } from "../slices/document";
 function PrevArrow(props) {
   const { onClick } = props;
   return (
@@ -48,13 +49,20 @@ const HomePage = () => {
   };
   const dispatch = useDispatch();
   const [isLoader, setIsLoader] = useState(true);
+  const maxItems = parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE)
   useEffect(() => {
-    getQuestion(1, 6)
+    console.log(maxItems);
+    getQuestion(1, maxItems)
       .then((res) => {
         dispatch(setQuestions(res.data));
-        setIsLoader(false);
       })
       .catch((err) => console.log(err));
+
+    getDocument("all", 1, maxItems)
+      .then((res) => {
+      dispatch(setDocs(res.data));
+      setIsLoader(false);
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const HomeContent = (

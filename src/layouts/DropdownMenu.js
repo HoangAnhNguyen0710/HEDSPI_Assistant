@@ -18,7 +18,6 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
 const DropdownMenu = () => {
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -96,16 +95,24 @@ const DropdownMenu = () => {
         </MenuItem>
         <Divider />
         <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          <NavLink to="/create_docs">Thêm tài liệu</NavLink>
+          <NavLink to="/create_docs" className="w-full">
+            <div className="flex items-center">
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            <div className="w-full"> Thêm tài liệu</div>
+            </div>
+          </NavLink>
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
+        <NavLink to="/create_docs" className="w-full">
+            <div className="flex items-center">
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            <div className="w-full"> Cài đặt</div>
+            </div>
+          </NavLink>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

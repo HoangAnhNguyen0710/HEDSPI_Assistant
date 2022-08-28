@@ -17,7 +17,7 @@ import Message from "../Message";
 const defaultQ = {
   title: "",
   topic: [],
-  author: "Nguyen Hoang Anh",
+  author: null,
   description: "",
   type: "",
   likes: 0,
@@ -61,7 +61,6 @@ const CreateQuestionForm = (props) => {
           setMSGType("success");
           setMSG("Tạo câu hỏi thành công !");
           setOpenSnackBar(true);
-          // props.setOpen(false);
         })
         .catch((err) => console.log(err));
       setQuestion(defaultQ);
