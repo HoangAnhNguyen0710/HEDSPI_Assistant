@@ -52,13 +52,13 @@ const HomePage = () => {
   const maxItems = parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE)
   useEffect(() => {
     console.log(maxItems);
-    getQuestion(1, maxItems)
+    getQuestion(1, maxItems, {dateCreated: "DESC"})
       .then((res) => {
         dispatch(setQuestions(res.data));
       })
       .catch((err) => console.log(err));
 
-    getDocument("all", 1, maxItems)
+    getDocument("all", 1, maxItems, {dateCreated: "DESC"})
       .then((res) => {
       dispatch(setDocs(res.data));
       setIsLoader(false);
