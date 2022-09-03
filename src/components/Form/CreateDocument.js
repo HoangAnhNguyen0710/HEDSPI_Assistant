@@ -50,7 +50,7 @@ const CreateDocumentForm = () => {
     // setDocument(defaultDoc);
     if(isUploaded){
       alert("Đăng tài liệu thành công !");
-      navigate("/");
+      navigate("/documents");
     }
   }, [isUploaded]);
 

@@ -9,7 +9,6 @@ import StarIcon from "@mui/icons-material/Star";
 import moment from "moment";
 
 const Document = (props) => {
-  console.log(props.document);
   const document = props.document;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

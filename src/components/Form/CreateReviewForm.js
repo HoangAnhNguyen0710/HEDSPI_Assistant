@@ -9,24 +9,29 @@ import {
     Snackbar,
     TextField,
   } from "@mui/material";
-  import React from "react";
+  import React, { useRef } from "react";
   import { useState } from "react";
   import AddIcon from "@mui/icons-material/Add";
-  import axiosClient from "../../config/axiosClient";
   import Message from "../Message";
-import { postReview } from "../../service/api";
-import { upload } from "@testing-library/user-event/dist/upload";
-  const defaultR = {
-    title: "",
-    topic: [],
-    author: null,
-    description: "",
-    type: "",
-    likes: 0,
-    views: 0,
-    rating: 0,
-  };
+  import { postReview } from "../../service/api";
+import JoditReact from "jodit-react-ts";
+import { useSelector } from "react-redux";
+  
+
   const CreateReviewForm = (props) => {
+    //user hiện tại
+    const currentUser = useSelector((state)=> state.user.value);
+    //default review
+    const defaultR = {
+      title: "",
+      topic: [],
+      author: currentUser,
+      description: "",
+      type: "",
+      likes: 0,
+      views: 0,
+      rating: 0,
+    };
     //quản lý review dc nhập vào
     const [review, setReview] = useState(defaultR);
     //quản lý list topic
@@ -38,7 +43,15 @@ import { upload } from "@testing-library/user-event/dist/upload";
     const [openSnackBar, setOpenSnackBar] = useState(false);
     //quản lý submit form
     const [confirm, setConfirm] = useState(false);
-
+    //quản lý cho review description
+    const editor = useRef(null)
+    const config = {
+      readonly: false,
+      placeholder: "Nhập mô tả",
+      uploader: {
+        insertImageAsBase64URI: true
+        },
+    }
     const handleCloseSnackBar = (event, reason) => {
       if (reason === "clickaway") {
         return;
@@ -61,6 +74,7 @@ import { upload } from "@testing-library/user-event/dist/upload";
             setMSGType("success");
             setMSG("Tạo review thành công !");
             setOpenSnackBar(true);
+            props.setReloadData(!props.reloadData);
           })
           .catch((err) => console.log(err));
         setReview(defaultR);
@@ -167,16 +181,13 @@ import { upload } from "@testing-library/user-event/dist/upload";
             </div>
           </div>
           <div className="my-4 w-full">
-            <TextField
-              id="outlined-multiline-static"
-              label="Mô tả"
-              multiline
-              rows={5}
-              fullWidth
-              name="description"
-              value={review.description}
-              onChange={handleChange}
-            />
+            <JoditReact
+            ref={editor}
+            value={review.description}
+            tabIndex={1} // tabIndex of textarea
+            onChange={newContent => setReview({ ...review, description: newContent })} 
+            config={config}
+        />
           </div>
           <div className="">
             <Button

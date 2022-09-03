@@ -2,7 +2,6 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
 import { Avatar, Slide, styled, useScrollTrigger } from "@mui/material";
 import { alpha, InputBase } from "@mui/material";
@@ -79,7 +78,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar(props) {
-  const [isLogin, setLogin] = React.useState(true);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <HideOnScroll>
@@ -96,7 +94,7 @@ export default function NavBar(props) {
               <div className="flex items-center">
                 <Sidebar />
                 <NavLink
-                  className=" text-white font-medium rounded-md md:text-bxse lg:text-lg text-xs mx-1 p1-3"
+                  className=" text-white font-medium rounded-md md:text-bxse lg:text-lg text-xs ml-1 mr-3 p1-3"
                   to="/"
                 >
                   <Avatar alt="" src={logo} />
@@ -148,9 +146,9 @@ export default function NavBar(props) {
                     inputProps={{ "aria-label": "search" }}
                   />
                 </Search>
-                {isLogin ? (
+                {/* {isLogin ? ( */}
                   <DropdownMenu />
-                ) : (
+                  {/*) : (
                   <NavLink
                     className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 "
                     to="/login"
@@ -158,7 +156,7 @@ export default function NavBar(props) {
                     <NotificationsNoneOutlinedIcon />
                     <span className="pl-2">Login</span>
                   </NavLink>
-                )}
+                )}*/}
               </div>
             </div>
           </Toolbar>

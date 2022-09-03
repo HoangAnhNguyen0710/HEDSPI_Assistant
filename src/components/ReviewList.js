@@ -7,7 +7,7 @@ const ReviewList = (props) => {
   return (
     <div className="flex w-full flex-wrap p-3">
       {reviewList.map((review)=> 
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-center justify-center" key={review.id}>
         <Review review={review} />
       </div>
       )}
