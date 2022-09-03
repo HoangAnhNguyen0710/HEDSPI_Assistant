@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-restricted-globals */
 import {
   Avatar,
   Chip,
@@ -10,22 +12,55 @@ import {
 } from "@mui/material";
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
 import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import avatar from "../assets/img/anhthe.png";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import avatar from "../assets/img/guest.png";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../service/api";
+import { setUser } from "../slices/user";
 
 const DropdownMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const user = useSelector((state) => state.user.value);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const LoginOrLogout = () => {
+    const isLogin = localStorage.getItem("HEDSPI_ASSISTANCE_USER_TOKEN");
+    if (isLogin === "") {
+      navigate("/login");
+    } else {
+      // userLogin(isLogin).then().catch((err) => {
+      //   alert("Phiên đăng nhập của bạn đã hết");
+        
+      // })
+      localStorage.setItem("HEDSPI_ASSISTANCE_USER_TOKEN", "");
+      location.reload();
+    }
+  };
+  useEffect(() => {
+    const credential = localStorage.getItem("HEDSPI_ASSISTANCE_USER_TOKEN");
+    if (credential !== "") {
+      userLogin(credential).then((res) => {
+        dispatch(setUser(res.data));
+      })
+      .catch((err)=> {
+        alert("Phiên đăng nhập của bạn đã hết");
+        localStorage.setItem("HEDSPI_ASSISTANCE_USER_TOKEN", "");
+        dispatch(setUser(null));
+      });
+    }
+  }, []);
 
   return (
     <div className="">
@@ -39,9 +74,10 @@ const DropdownMenu = () => {
           aria-expanded={open ? "true" : undefined}
         >
           <span>
-            <Avatar sx={{ width: 32, height: 32 }} src={avatar}>
-              M
-            </Avatar>
+            <Avatar
+              sx={{ width: 32, height: 32 }}
+              src={user !== null ? user.picture : avatar}
+            ></Avatar>
           </span>
         </IconButton>
       </Tooltip>
@@ -82,43 +118,62 @@ const DropdownMenu = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar sx={{ width: 32, height: 32 }} src={avatar}></Avatar>{" "}
-          <span className="px-3">Nguyen Hoang Anh</span>
-          <Chip label="ADMIN" color="secondary" />
+          <Avatar
+            sx={{ width: 32, height: 32 }}
+            src={user !== null ? user.picture : avatar}
+          ></Avatar>{" "}
+          <span className="px-3">{user !== null ? user.name : "Guest"}</span>
+          <Chip label={user !== null ? user.role : "Guest"} color="secondary" />
         </MenuItem>
-        <MenuItem>
-          <AttachEmailOutlinedIcon />{" "}
-          <span className="pl-3">anh.nh194474@sis.hust.edu.vn</span>
-        </MenuItem>
-        <MenuItem>
-          <SellOutlinedIcon /> <span className="px-3">K64</span>
-        </MenuItem>
+        {user !== null ? (
+          
+            <MenuItem>
+              <AttachEmailOutlinedIcon />{" "}
+              <span className="pl-3">{user.email}</span>
+            </MenuItem>
+         ) : (
+          ""
+        )}
+        {user !== null ? (
+            <MenuItem>
+              <SellOutlinedIcon />{" "}
+              <span className="px-3">
+                {user.schoolyear !== null ? user.schoolyear : "Khóa: chưa cập nhật"}
+              </span>
+            </MenuItem>  
+        ) : (
+          ""
+        )}
         <Divider />
         <MenuItem>
           <NavLink to="/create_docs" className="w-full">
             <div className="flex items-center">
-            <ListItemIcon>
-              <PersonAdd fontSize="small" />
-            </ListItemIcon>
-            <div className="w-full"> Thêm tài liệu</div>
+              <ListItemIcon>
+                <PersonAdd fontSize="small" />
+              </ListItemIcon>
+              <div className="w-full"> Thêm tài liệu</div>
             </div>
           </NavLink>
         </MenuItem>
         <MenuItem>
-        <NavLink to="/create_docs" className="w-full">
+          <NavLink to="/create_docs" className="w-full">
             <div className="flex items-center">
-            <ListItemIcon>
-              <Settings fontSize="small" />
-            </ListItemIcon>
-            <div className="w-full"> Cài đặt</div>
+              <ListItemIcon>
+                <Settings fontSize="small" />
+              </ListItemIcon>
+              <div className="w-full"> Cài đặt</div>
             </div>
           </NavLink>
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+          <div className="w-full" onClick={LoginOrLogout}>
+            <div className="flex items-center">
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              <div className="w-full">{user !== null ? "Logout" : "Login"}</div>
+            </div>
+          </div>
         </MenuItem>
       </Menu>
     </div>

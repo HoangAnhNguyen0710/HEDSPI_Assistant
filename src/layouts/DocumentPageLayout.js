@@ -11,7 +11,7 @@ import {
   import PageLayout from "../layouts/PagesLayout";
   import { useState } from "react";
   import DocumentList from "../components/DocumentList";
-  import { useDispatch, useSelector } from "react-redux";
+  import { useDispatch } from "react-redux";
   import { getDocument, getDocumentNum } from "../service/api";
   import { setDocs } from "../slices/document";
   import Pagination from "../layouts/Pagination";

@@ -178,7 +178,7 @@ const ReviewPage = () => {
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogContent>
           <div className="flex items-center justify-center">
-            <CreateReviewForm setOpen={setOpen} />
+            <CreateReviewForm setOpen={setOpen} setReloadData={setReloadData} reloadData={reloadData}/>
           </div>
         </DialogContent>
       </Dialog>

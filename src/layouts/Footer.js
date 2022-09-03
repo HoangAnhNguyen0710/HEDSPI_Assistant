@@ -90,14 +90,14 @@ const Footer = () => {
           <a
             rel="stylesheet"
             className="font-semibold text-white flex items-center py-2"
-            href="/blogs"
+            href="/reviews"
           >
             <ChatBubbleOutlineIcon /> <span className="pl-2">Review</span>
           </a>
           <a
             rel="stylesheet"
             className="font-semibold text-white flex items-center py-2"
-            href="/about"
+            href="/questions"
           >
             <InfoIcon /> <span className="pl-2">Q&A</span>
           </a>

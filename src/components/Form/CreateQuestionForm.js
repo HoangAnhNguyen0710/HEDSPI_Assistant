@@ -10,21 +10,28 @@ import {
   TextField,
 } from "@mui/material";
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import axiosClient from "../../config/axiosClient";
 import Message from "../Message";
-const defaultQ = {
-  title: "",
-  topic: [],
-  author: null,
-  description: "",
-  type: "",
-  likes: 0,
-  views: 0,
-  rating: 0,
-};
-const CreateQuestionForm = (props) => {
+import { postQuestion } from "../../service/api";
+import JoditReact from "jodit-react-ts";
+import { useSelector } from "react-redux";
+
+
+const CreateQuestionForm = () => {
+  //user hiện tại
+  const currentUser = useSelector((state)=> state.user.value);
+  //default question
+  const defaultQ = {
+    title: "",
+    topic: [],
+    author: currentUser,
+    description: "",
+    type: "",
+    likes: 0,
+    views: 0,
+    rating: 0,
+  };
   //quản lý câu hỏi dc nhập vào
   const [question, setQuestion] = useState(defaultQ);
   //quản lý list topic
@@ -36,7 +43,15 @@ const CreateQuestionForm = (props) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   //quản lý submit form
   const [confirm, setConfirm] = useState(false);
-
+  //quản lý cho review description
+  const editor = useRef(null)
+  const config = {
+    readonly: false,
+    placeholder: "Nhập mô tả",
+    uploader: {
+      insertImageAsBase64URI: true
+      },
+  }
   const handleCloseSnackBar = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -54,8 +69,7 @@ const CreateQuestionForm = (props) => {
       const uploadQ = question;
       uploadQ.topic = topicList;
       // setQuestion(uploadQ);
-      axiosClient
-        .post(`/question`, uploadQ)
+      postQuestion(uploadQ)
         .then((res) => {
           console.log(res);
           setMSGType("success");
@@ -167,16 +181,13 @@ const CreateQuestionForm = (props) => {
           </div>
         </div>
         <div className="my-4 w-full">
-          <TextField
-            id="outlined-multiline-static"
-            label="Mô tả"
-            multiline
-            rows={5}
-            fullWidth
-            name="description"
+        <JoditReact
+            ref={editor}
             value={question.description}
-            onChange={handleChange}
-          />
+            tabIndex={1} // tabIndex of textarea
+            onChange={newContent => setQuestion({ ...question, description: newContent })} 
+            config={config}
+        />
         </div>
         <div className="">
           <Button

@@ -51,7 +51,6 @@ const HomePage = () => {
   const [isLoader, setIsLoader] = useState(true);
   const maxItems = parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE)
   useEffect(() => {
-    console.log(maxItems);
     getQuestion(1, maxItems, {dateCreated: "DESC"})
       .then((res) => {
         dispatch(setQuestions(res.data));
