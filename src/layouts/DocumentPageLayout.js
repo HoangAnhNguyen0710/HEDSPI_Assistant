@@ -93,7 +93,7 @@ import {
           </div>
   
           <div className="flex flex-wrap h-fit">
-            <div className="hidden sm:block sm:w-1/3 h-fit py-5">
+            <div className="hidden sm:block sm:w-1/3 h-fit py-5 pr-4">
               <FilterForm setFilterVal={setFilterVal}/>
             </div>
             <div className="w-full sm:w-2/3 py-5 min-h-max flex flex-col justify-between">

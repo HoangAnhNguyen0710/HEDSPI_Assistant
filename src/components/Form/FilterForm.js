@@ -1,18 +1,13 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import RoomIcon from "@mui/icons-material/Room";
 import {
-  Checkbox,
   FormControlLabel,
-  FormGroup,
   InputAdornment,
   Radio,
   RadioGroup,
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import axios from "axios";
-import { getDocumentNum } from "../../service/api";
-import { useEffect } from "react";
 
 const FilterForm = (props) => {
   const [filter, setFilter] = useState({

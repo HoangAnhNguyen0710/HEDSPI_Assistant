@@ -66,7 +66,7 @@ const QuestionDetail = (props) => {
           <RateReviewIcon />
         </span>
         {/* <span>{question.author}</span> */}
-        <span className="pr-2">Hoang Anh Nguyen</span>
+        <span className="pr-2">{question.author !== null && question.author.name}</span>
         <span>
           ---{moment(question.createdAt).format("MMMM Do YYYY, h:mm:ss a")}---
         </span>
