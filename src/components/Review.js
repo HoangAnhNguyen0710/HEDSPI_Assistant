@@ -3,14 +3,15 @@ import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import { Chip, Dialog, DialogContent } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SellOutlinedIcon from '@mui/icons-material/SellOutlined';
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import StarIcon from "@mui/icons-material/Star";
 import moment from "moment";
 import ReviewDetail from "./ReviewDetail";
-
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 const Review = (props) => {
 
   const [openDialog, setOpenDialog] = useState(false);
+  
+  const review = props.review;
+  const [likeNum, setLikeNum] = useState(review.likes.length);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -20,26 +21,16 @@ const Review = (props) => {
     setOpenDialog(false);
   };
 
-  const review = props.review;
-
   return (
     <div className="w-full ml-3 my-6 mt-0 pb-3 p-2 rounded-lg border border-gray-300 flex flex-col">
       <div className=" px-6 flex items-center">
         <div className="text-sm flex flex-col w-full">
-          <span className="font-semibold py-1 uppercase">{review.title}</span>
+          <span className="font-semibold pt-3 uppercase">{review.title}</span>
         <span className="flex text-xs opacity-60 py-1 justify-between">
-          {review.author !== null ? (
-            <>
-              <div className="text-sm flex flex-col px-3 w-fit">
-                <span className="font-semibold">
-                  {review.author.name} {review.author.schoolyear}
-                </span>
-              </div>
-            </>
-          ) : (
-            <>Nguyen Hoang Anh</>
-          )}
-          <span className="px-1">-- {moment(review.createdAt).format(('MMMM Do YYYY, h:mm:ss a'))} --</span>
+        <div className="py-3 text-sm opacity-60 flex">
+        {review.author !== null ?  <span className="font-semibold pr-2">{review.author.name}</span> : <></>}
+           <span>{moment(review.createdAt).format(('MMMM Do YYYY, h:mm a'))}</span>
+        </div>
         </span>
         </div>
       </div>
@@ -62,11 +53,9 @@ const Review = (props) => {
           </p>
         </div>
         <span className="p-3 pt-2 pb-0 flex items-center">
-          <RemoveRedEyeIcon /> <span className="px-1">{review.seen_num}</span>
+          <FavoriteIcon /> <span className="px-1">{likeNum}</span>
           <span className="px-2"></span>
-          <FavoriteIcon /> <span className="px-1">{review.likes_num}</span>
-          <span className="px-2"></span>
-          <StarIcon /> <span className="px-1">{review.rating}/5</span>
+          <ChatBubbleOutlineOutlinedIcon /> <span className="px-1">{review.comments.length}</span>
         </span>
         <div className="text-right">
           <button className="text-sm opacity-80" onClick={handleOpenDialog}>Xem thêm...</button>
@@ -75,7 +64,7 @@ const Review = (props) => {
       <Dialog open={openDialog} onClose={handleCloseDialog} fullWidth={true}>
         <DialogContent>
           <div className="flex items-center justify-center w-full">
-            <ReviewDetail review={review}/>
+            <ReviewDetail review={review} likeNum={likeNum} setLikeNum={setLikeNum}/>
           </div>
         </DialogContent>
       </Dialog>

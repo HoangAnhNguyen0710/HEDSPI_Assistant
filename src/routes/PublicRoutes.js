@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import ReviewPage from "../pages/ReviewPage";
 import ExamPage from "../pages/ExamPage";
 import DocumentDetailPage from "../pages/DocumentDetailPage";
+import SearchResultPage from "../pages/SearchResultPage";
 
 
 
@@ -15,6 +16,7 @@ const PublicRoutes = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/documents" element={<DocumentPage />} />
+      <Route path="/search_result" element={<SearchResultPage />} />
       <Route path="/documents/exams" element={<ExamPage />} />
       <Route path="/documents/:id" element={<DocumentDetailPage/>} />
       <Route path="/about" element={<AboutUsPage />} />

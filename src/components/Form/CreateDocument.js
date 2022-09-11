@@ -11,36 +11,49 @@ import {
 
 import React from "react";
 import ImageUploader from "../ImageUpload";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAllSubject, postDocument } from "../../service/api";
 import { setSubjects } from "../../slices/subjects";
-const defaultDoc = {
-  title: "",
-  subject: Object,
-  program: "",
-  author: null,
-  lecturer: "",
-  description: "",
-  semester: 1,
-  type: "",
-  likes: 0,
-  views: 0,
-  rating: 0,
-};
+import JoditReact from "jodit-react-ts";
 
 const CreateDocumentForm = () => {
+  const user = useSelector((state) => state.user.value);
+  const subjectList = useSelector((state) => state.subject.value);
+  const defaultDoc = {
+    title: "",
+    subject: null,
+    program: "",
+    author: user,
+    lecturer: "",
+    description: "",
+    semester: 1,
+    type: "",
+    likes: 0,
+    views: 0,
+    rating: 0,
+  };
   const navigate = useNavigate();
   const [document, setDocument] = useState(defaultDoc);
   const [uploadIMG, setUploadIMG] = useState(false);
 
-  const subjectList = useSelector((state) => state.subject.value);
   const [isUploaded, setIsUploaded] = useState(false);
   const dispatch = useDispatch();
-  //   console.log(subjectList);
+  
+  const editor = useRef(null)
+  const config = {
+    readonly: false,
+    placeholder: "Nhập mô tả",
+    uploader: {
+      insertImageAsBase64URI: true
+      },
+  }
+
   const handleChange = (e) => {
+    if(e.target.name !== "subject"){
     setDocument({ ...document, [e.target.name]: e.target.value });
+    }
   };
 
   const handleChangeSubject = (value) => {
@@ -57,8 +70,10 @@ const CreateDocumentForm = () => {
   useEffect(()=>{
     getAllSubject.then((res)=> dispatch(setSubjects(res.data)));
   }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(document)
     setUploadIMG(!uploadIMG);
     postDocument(document)
     .then((res)=> console.log(res))
@@ -69,9 +84,8 @@ const CreateDocumentForm = () => {
 
   return (
     <div className="w-full sm:w-2/3 m-3">
-      <span className="py-3 text-2xl font-semibold">Tạo tài liệu</span>
-      <form className="py-6" onSubmit={handleSubmit}>
-        <div className="flex flex-wrap">
+      <span className=" text-2xl font-semibold">Tạo tài liệu</span>
+        <div className="flex flex-wrap my-3">
           <TextField
             name="title"
             value={document.title}
@@ -108,9 +122,9 @@ const CreateDocumentForm = () => {
                 id="demo-select-small"
                 fullWidth
                 label="Học phần"
-                name="subject_name"
+                name="subject"
                 // onChange={handleChange}
-                value={document.subject.name}
+                value={document.subject !== null ? document.subject.name : ""}
               >
                 {subjectList.map((subject) => (
                   <MenuItem key={subject.id} value={subject.name} onClick={()=> handleChangeSubject(subject)}>
@@ -182,17 +196,15 @@ const CreateDocumentForm = () => {
           setIsUploaded={setIsUploaded}
         />
         <div className="my-4 w-full">
-          <TextField
-            id="outlined-multiline-static"
-            label="Mô tả"
-            multiline
-            rows={5}
-            fullWidth
-            name="description"
+            <JoditReact
+            ref={editor}
             value={document.description}
-            onChange={handleChange}
-          />
+            tabIndex={1} // tabIndex of textarea
+            onChange={newContent => setDocument({ ...document, description: newContent })} 
+            config={config}
+        />
         </div>
+        <form className="py-6" onSubmit={handleSubmit}>
         <div className="">
           <Button variant="contained" type="submit">
             Tạo tài liệu

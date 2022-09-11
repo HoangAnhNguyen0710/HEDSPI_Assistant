@@ -132,6 +132,7 @@ export default function NavBar(props) {
                 </NavLink>
               </div>
               <div className="flex items-center pr-3">
+                <form action="/search_result">
                 <Search
                   sx={{
                     justifySelf: "space-between",
@@ -144,19 +145,11 @@ export default function NavBar(props) {
                   <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ "aria-label": "search" }}
+                    name="document"
                   />
                 </Search>
-                {/* {isLogin ? ( */}
+                </form>
                   <DropdownMenu />
-                  {/*) : (
-                  <NavLink
-                    className="flex items-center text-main hover:bg-slate-200 hover:rounded-lg p-2 "
-                    to="/login"
-                  >
-                    <NotificationsNoneOutlinedIcon />
-                    <span className="pl-2">Login</span>
-                  </NavLink>
-                )}*/}
               </div>
             </div>
           </Toolbar>

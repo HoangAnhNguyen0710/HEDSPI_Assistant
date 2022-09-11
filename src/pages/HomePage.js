@@ -87,7 +87,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="p-6 text-center text-3xl font-bold uppercase">
-          Có gì ở VIJA ?
+          Có gì ở HEDSPI ASSISTANT ?
         </div>
         <div className="flex flex-wrap justify-center md:flex-nowrap p-9">
           <div className="w-4/5 md:w-1/3 lg:w-1/3 p-3 m-3 shadow-lg min-h-fit flex flex-col items-center justify-between rounded-md">

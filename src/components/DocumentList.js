@@ -18,7 +18,9 @@ const DocumentList = (props) => {
     <div className="flex w-full flex-wrap p-3">
       {documentList.map((document)=> 
       <div className="w-full flex items-center justify-center lg:w-1/2 py-3 h-full" key={document.id}>
+        <div className="w-full hover:scale-105 transition ease-in-out delay-150 duration-200">
         <Document document={document} />
+        </div>
       </div>)}
     </div>
   );

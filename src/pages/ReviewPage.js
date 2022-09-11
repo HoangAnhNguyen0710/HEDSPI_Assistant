@@ -104,7 +104,7 @@ const ReviewPage = () => {
   };
   const ReviewContent = (
     <>
-      <div className="h-fit py-16 px-10">
+      <div className="min-h-screen py-16 px-10">
       <div className="flex items-center justify-between w-full pb-6">
           <Breadcrumbs aria-label="breadcrumb">
             <NavLink
@@ -156,7 +156,7 @@ const ReviewPage = () => {
               </Tabs>
             </div>
           </div>
-          <div className="sm:w-2/3 md:w-4/5 h-fit py-5">
+          <div className="w-full sm:w-2/3 md:w-4/5 h-fit py-5">
             <TabPanel value={value} index={0}>
               <ReviewList reviewList={reviewList}/>
             </TabPanel>
