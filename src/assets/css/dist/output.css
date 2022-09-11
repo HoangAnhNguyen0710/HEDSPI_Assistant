@@ -1154,6 +1154,10 @@ video {
   padding-top: 0.25rem;
 }
 
+.pr-4 {
+  padding-right: 1rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1517,6 +1521,10 @@ video {
 @media (min-width: 1024px) {
   .lg\:m-4 {
     margin: 1rem;
+  }
+
+  .lg\:m-2 {
+    margin: 0.5rem;
   }
 
   .lg\:block {

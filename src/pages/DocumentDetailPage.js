@@ -12,18 +12,20 @@ import { useParams } from "react-router-dom";
 import PageLayout from "../layouts/PagesLayout";
 import DocumentImageDetail from "../components/DocumentImageDetail";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CreateCommentForm from "../components/Form/CreateCommentForm";
 import { useEffect } from "react";
-import { getDocumentById, getDocumentCmt } from "../service/api";
+import { checkHasLike, disLike, getDocumentById, getDocumentCmt, postLike } from "../service/api";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { storage } from "../config/firebaseConfig";
+import { useSelector } from "react-redux";
 // import { useState, useEffect } from "react";
 // import { storage } from "../config/firebaseConfig";
 // import { ref, listAll, getDownloadURL } from "firebase/storage";
 // import { v4 } from "uuid";
 // import ImageUploader from "../components/ImageUpload";
 const DocumentDetailPage = () => {
+  const user = useSelector((state)=> state.user.value);
   const { id } = useParams();
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogImage, setDialogImage] = useState(null);
@@ -32,13 +34,53 @@ const DocumentDetailPage = () => {
   const [document, setDocument] = useState(null);
 
   const [isLoader, setIsLoader] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeId, setLikeId] = useState();
+  const [likeNum, setLikeNum] = useState(0);
+
   useEffect(()=> {
     if(document !== null){
     getDocumentCmt(document.id).then((res) => {  
-     setCommentList(res.data)})
+     setCommentList(res.data)
+    })
     .catch((err) => console.log(err));
     }
  }, [updateData]);
+
+ useEffect(() => {
+    console.log(user)
+    if(user !== null){
+      checkHasLike(user.id, id, "document")
+      .then((res) => {
+        console.log(res.data)
+        setIsLiked(true);
+        setLikeId(res.data.id);
+      })
+      .catch((err) => setIsLiked(false))
+    }
+  
+}, [user])
+
+const LikeOrDislike = () => {
+  if(user !== null){
+    if(isLiked === false){
+      postLike(user, document, "document")
+      .then((res)=> {
+        setLikeId(res.data.id);
+        setIsLiked(true);
+        setLikeNum(likeNum + 1);
+      });
+    } else {
+      disLike(likeId)
+      .then(() => {
+        setIsLiked(false)
+        setLikeNum(likeNum - 1);
+      })
+    }
+  }
+  else alert("Bạn phải đăng nhập để thực hiện chức năng này !");
+}
+
   const handleOpenDialog = (item) => {
     setOpenDialog(true);
     setDialogImage(item);
@@ -51,9 +93,9 @@ const DocumentDetailPage = () => {
 
   useEffect(() => {
     getDocumentById(id).then((res) => {
+      console.log(res.data)
       setDocument(res.data);
-      setIsLoader(false);
-      
+      setLikeNum(res.data.likes.length);
       if(imageList.length === 0){
         const imageListRef = ref(storage, `${res.data.subject.name}/${res.data.author.name}/`);
         listAll(imageListRef).then((res)=> {
@@ -62,7 +104,6 @@ const DocumentDetailPage = () => {
               setImageList((prev)=> [...prev, url]);
             })
           })
-          // console.log(imageList);
         }).catch((err) => console.log(err));
       }
 
@@ -70,6 +111,20 @@ const DocumentDetailPage = () => {
         console.log(res.data);
         setCommentList(res.data)})
        .catch((err) => console.log(err));
+
+    //   setTimeout(()=> {
+    //   console.log("aaaa", user);
+      
+    //   if(user !== null){
+    //     checkHasLike(user.id, res.data.id, "document")
+    //     .then((res) => {
+    //       setIsLiked(true);
+    //       setLikeId(res.data.id);
+    //     })
+    //     .catch((err) => setIsLiked(false))
+    //   }
+    // },1000);
+      setIsLoader(false);
     }).catch((err) => {
       console.log(err)
       // setErrMSG(err.response);
@@ -132,10 +187,8 @@ const DocumentDetailPage = () => {
                 </div>
               ))}
             </div>
-            <span className="p-3 pl-0 flex items-center">
-              <RemoveRedEyeIcon /> <span className="px-1"></span>
-              <span className="px-2"></span>
-              <FavoriteIcon /> <span className="px-1"></span>
+            <span className="p-3 pl-0 flex items-center hover:cursor-pointer w-fit" onClick={LikeOrDislike}>
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon/>} <span className="px-1">{likeNum}</span>
               {/* <span className="px-2"></span>
         <ChatBubbleIcon /> <span className="px-1">{review.CommentNum}</span> */}
             </span>

@@ -52,6 +52,7 @@ const DropdownMenu = () => {
     const credential = localStorage.getItem("HEDSPI_ASSISTANCE_USER_TOKEN");
     if (credential !== "") {
       userLogin(credential).then((res) => {
+        console.log(res.data);
         dispatch(setUser(res.data));
       })
       .catch((err)=> {
