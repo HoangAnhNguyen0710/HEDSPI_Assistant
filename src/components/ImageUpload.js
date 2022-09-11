@@ -14,7 +14,7 @@ const ImageUploader = (props) => {
     for (let i = 0; i < imageUpload.length; i++) {
       const imageRef = ref(
         storage,
-        `${document.subject_name}/${document.author}/${
+        `${document.subject.name}/${document.author.name}/${
           imageUpload[i].name + v4()
         }`
       );

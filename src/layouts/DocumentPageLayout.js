@@ -22,7 +22,7 @@ import {
     });
     
     const [sortVal, setSortVal] = useState("Latest");
-
+    const [filterVal, setFilterVal] = useState(null);
     const [numOfPages, setNumOfPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
   
@@ -53,14 +53,14 @@ import {
     };
   
     useEffect(() => {
-      getDocument(props.doc_type, currentPage, parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE), sort)
+      getDocument(props.doc_type, currentPage, parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE), sort, filterVal)
         .then((res) => {
         dispatch(setDocs(res.data));
         setIsLoader(false);
       })
-      getDocumentNum(props.doc_type).then((res)=> setNumOfPages(res.data/parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE)));
+      getDocumentNum(props.doc_type, filterVal).then((res)=> {setNumOfPages(res.data/parseInt(process.env.REACT_APP_MAX_ITEMS_PER_PAGE))});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPage, sortVal]);
+    }, [currentPage, sortVal, filterVal]);
 
     const DocContent = (
       <>
@@ -94,7 +94,7 @@ import {
   
           <div className="flex flex-wrap h-fit">
             <div className="hidden sm:block sm:w-1/3 h-fit py-5">
-              <FilterForm />
+              <FilterForm setFilterVal={setFilterVal}/>
             </div>
             <div className="w-full sm:w-2/3 py-5 min-h-max flex flex-col justify-between">
               <div>

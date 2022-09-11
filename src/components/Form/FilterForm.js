@@ -11,25 +11,41 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import { getDocumentNum } from "../../service/api";
+import { useEffect } from "react";
 
 const FilterForm = (props) => {
   const [filter, setFilter] = useState({
-    name: "",
-    ID: "",
-    year: "",
-    note: "", // hệ đào tạo 4 hay 5 năm ???
+    subject_name: "",
+    subject_code: "",
+    year: 0,
+    semester_1: 0,
+    semester_2: 0,
+    program: "", // hệ đào tạo 4 hay 5 năm ???
   });
 
   const handleChange = (e) => {
     setFilter({ ...filter, [e.target.name]: e.target.value });
   };
 
+  const clearChange = (e) => {
+    if(e.target.name === "year") setFilter({ ...filter, [e.target.name]: 0 })
+    else
+    setFilter({ ...filter, [e.target.name]: "" });
+  }
+
   const handleSubmit = (e) => {
+    const fullFilter = filter;
+    if(filter.year === 0)  {
+      fullFilter.semester_1 = 1;
+      fullFilter.semester_2 = 10
+    } else{
+      fullFilter.semester_1 = (filter.year * 2) - 1;
+      fullFilter.semester_2 = filter.year * 2
+    }
     e.preventDefault();
-    axios
-      .get(`http://localhost:5000/companies/all`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    props.setFilterVal(fullFilter)
+    // getDocumentNum('all', fullFilter).then((res)=> alert(res.data))
   };
   return (
     <>
@@ -39,10 +55,10 @@ const FilterForm = (props) => {
             fullWidth
             id="input-with-icon-adornment"
             label="Tìm kiếm theo tên học phần"
-            value={filter.name}
+            value={filter.subject_name}
             placeholder="Nhập tên học phần"
             size="small"
-            name="name"
+            name="subject_name"
             onChange={handleChange}
             InputProps={{
               startAdornment: (
@@ -58,10 +74,10 @@ const FilterForm = (props) => {
             fullWidth
             id="outlined-required"
             label="Tìm kiếm theo mã học phần"
-            value={filter.ID}
+            value={filter.subject_code}
             placeholder="Nhập mã học phần"
             size="small"
-            name="ID"
+            name="subject_code"
             onChange={handleChange}
             InputProps={{
               startAdornment: (
@@ -79,23 +95,24 @@ const FilterForm = (props) => {
           SEARCH
         </button>
         <label className="py-4 font-medium">Chương trình</label>
-        <FormGroup>
+        <RadioGroup name="program" value={filter.program} onChange={handleChange} onDoubleClick={clearChange}>
           <FormControlLabel
-            control={<Checkbox onChange={handleChange} name="engineer" />}
+            control={<Radio value="K64 đổ về trước"/>}
             label="Từ K64 trở về trước"
           />
           <FormControlLabel
-            control={<Checkbox onChange={handleChange} name="bachelor" />}
+            control={<Radio value="Từ K65 trở đi"/>}
             label="Từ K65 trở đi"
           />
-        </FormGroup>
+        </RadioGroup>
         <label className="py-4 font-medium">Thời gian</label>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-          name="radio-buttons-group"
+          value={filter.year}
+          name="year"
+          onChange={handleChange}
+          onDoubleClick={clearChange}
         >
-          <FormControlLabel value="" control={<Radio />} label="Tất cả" />
           <FormControlLabel value={1} control={<Radio />} label="Năm 1" />
           <FormControlLabel value={2} control={<Radio />} label="Năm 2" />
           <FormControlLabel value={3} control={<Radio />} label="Năm 3" />

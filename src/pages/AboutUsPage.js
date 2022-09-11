@@ -6,28 +6,11 @@ import PageLayout from "../layouts/PagesLayout";
 // import { v4 } from "uuid";
 // import ImageUploader from "../components/ImageUpload";
 const AboutUsPage = () => {
-  // const [imageList, setImageList] = useState([]);
-  // const imageListRef = ref(storage, "/images")
-  // useEffect(()=>{
-  //   listAll(imageListRef).then((res)=> {
-  //     console.log(res);
-  //     res.items.forEach((item)=> {
-  //       getDownloadURL(item).then((url) => {
-  //         setImageList((prev)=> [...prev, url]);
-  //       })
-  //     })
-  //   });
-  // }, []);
  
   const AboutContent = (
     <>
       <div className="min-h-screen py-20">
-        {/* <div className="flex items-center justify-center">
-        <CreateDocumentForm/>
-        </div> */}
-        {/* {imageList.map((url)=> {
-          return <img src={url} alt=""/>
-        })} */}
+
       </div>
     </>
   );
