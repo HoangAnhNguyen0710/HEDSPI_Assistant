@@ -9,7 +9,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../slices/user";
-
+import { Avatar, Divider } from "@mui/material";
+import web_icon from '../assets/img/logo/hedspi-logo.jpg';
 const LoginPage = () => {
   const navigate = useNavigate();
   const [loginSwitch, setLoginSwitch] = useState(true);
@@ -24,14 +25,17 @@ const LoginPage = () => {
   
   return (
     <div className="w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center">
-      <div className="bg-white w-4/5 sm:w-1/2 lg:w-2/3 h-4/5 rounded-2xl flex items-center justify-center md:h-4/5 lg:h-4/5">
-        <div className="hidden lg:block md:w-7/12 lg:w-2/3 bg-green-200 h-full rounded-tl-2xl rounded-bl-2xl">
-          <img
-            alt=""
-            src={working}
-            className="h-full rounded-tl-2xl rounded-bl-2xl object-cover"
-          />
+      <div className="bg-white w-fit h-fit rounded-2xl flex items-center justify-center p-9 px-12 flex-col">
+        <div className="rounded-full shadow-md m-4 flex flex-col items-center"> 
+          <Avatar 
+            alt="web-icon" 
+            src={web_icon}
+            sx={{ width: 64, height: 64 }}
+            />
         </div>
+        <span className="font-semibold text-md pb-1">LOGIN OR SIGN UP</span>
+        <span className="text-sm opacity-80">with</span>
+        <div className="py-3">
         <GoogleLogin
           onSuccess={async(credentialResponse) => {
             userLogin(credentialResponse.credential).then((res) => {
@@ -43,15 +47,10 @@ const LoginPage = () => {
           onError={() => {
             console.log("Login Failed");
           }}
+          size="medium"
         />
-        
-        <div className="w-full sm:w-2/3 md:w-2/3 lg:w-1/3  mx-8">
-          {loginSwitch ? (
-            <LoginForm setLoginSwitch={setLoginSwitch} />
-          ) : (
-            <RegisterForm setLoginSwitch={setLoginSwitch} />
-          )}
         </div>
+      {/* </div> */}
       </div>
     </div>
   );
