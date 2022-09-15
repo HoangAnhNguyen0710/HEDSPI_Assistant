@@ -129,17 +129,17 @@ const HomePage = () => {
         </div>
       </div>
       <div className="p-6 px-9">
-        <div className="text-3xl font-bold px-3">
+        <div className="text-3xl font-bold p-3">
           TRENDING (TÀI LIỆU ĐƯỢC TÌM KIẾM NHIỀU NHẤT)
         </div>
         <DocumentList filter="trending" />
-        <div className="text-3xl font-bold px-3">
+        <div className="text-3xl font-bold p-3">
           BEST DOCS (TÀI LIỆU ĐƯỢC ĐÁNH GIÁ CAO NHẤT)
         </div>
         <DocumentList filter="best" />
-        <div className="text-3xl font-bold px-3">CÂU HỎI ĐƯỢC QUAN TÂM </div>
+        <div className="text-3xl font-bold p-3">CÂU HỎI ĐƯỢC QUAN TÂM </div>
         <QuestionList />
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center p-3">
           <img alt="" src={banner} className="rounded-2xl"></img>
         </div>
       </div>
