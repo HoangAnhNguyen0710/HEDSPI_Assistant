@@ -9,7 +9,7 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Message from "../Message";
@@ -52,6 +52,14 @@ const CreateQuestionForm = () => {
       insertImageAsBase64URI: true
       },
   }
+
+  useEffect(()=> {
+    if(currentUser === null) {
+      alert("Vui lòng đăng nhập để thực hiện chức năng này!");
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
+    }
+  }, [currentUser])
   const handleCloseSnackBar = (event, reason) => {
     if (reason === "clickaway") {
       return;

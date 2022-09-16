@@ -16,6 +16,7 @@ import {
   import { postReview } from "../../service/api";
 import JoditReact from "jodit-react-ts";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
   
 
   const CreateReviewForm = (props) => {
@@ -52,6 +53,15 @@ import { useSelector } from "react-redux";
         insertImageAsBase64URI: true
         },
     }
+
+    useEffect(()=> {
+      if(currentUser === null) {
+        alert("Vui lòng đăng nhập để thực hiện chức năng này!");
+          // eslint-disable-next-line no-restricted-globals
+          location.reload();
+      }
+    }, [currentUser])
+
     const handleCloseSnackBar = (event, reason) => {
       if (reason === "clickaway") {
         return;
