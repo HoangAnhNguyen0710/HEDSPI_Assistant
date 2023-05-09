@@ -1,0 +1,230 @@
+/* eslint-disable no-undef */
+import {
+    Button,
+    Chip,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Snackbar,
+    TextField,
+  } from "@mui/material";
+  import React, { useRef } from "react";
+  import { useState } from "react";
+  import AddIcon from "@mui/icons-material/Add";
+  import Message from "../Message";
+  import { postReview } from "../../services/api";
+import JoditReact from "jodit-react-ts";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+  
+
+  const CreateReviewForm = (props: any) => {
+    //user hiện tại
+    const currentUser = useSelector((state: any)=> state.user.value);
+    //default review
+    const defaultR = {
+      title: "",
+      topic: [],
+      author: currentUser,
+      description: "",
+      type: "",
+      likes: 0,
+      views: 0,
+      rating: 0,
+    };
+    //quản lý review dc nhập vào
+    const [review, setReview] = useState(defaultR);
+    //quản lý list topic
+    const [topicList, setTopicList] = useState<any>([]);
+    const [addTopic, setAddTopic] = useState("");
+    //quản lý message và loại message
+    const [MSG, setMSG] = useState("");
+    const [MSGType, setMSGType] = useState("");
+    const [openSnackBar, setOpenSnackBar] = useState(false);
+    //quản lý submit form
+    const [confirm, setConfirm] = useState(false);
+    //quản lý cho review description
+    const editor = useRef(null)
+    const config = {
+      readonly: false,
+      placeholder: "Nhập mô tả",
+      uploader: {
+        insertImageAsBase64URI: true
+        },
+      tabIndex: 1,
+    }
+
+    useEffect(()=> {
+      if(currentUser === null) {
+        alert("Vui lòng đăng nhập để thực hiện chức năng này!");
+          // eslint-disable-next-line no-restricted-globals
+          location.reload();
+      }
+    }, [currentUser])
+
+    const handleCloseSnackBar = (event: any, reason: any) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setOpenSnackBar(false);
+    };
+  
+    const handleChange = (e: any) => {
+      setReview({ ...review, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = (e: any) => {
+      e.preventDefault();
+      if (confirm === true) {
+        const uploadQ = review;
+        uploadQ.topic = topicList;
+        postReview(uploadQ)
+          .then((res) => {
+            console.log(res);
+            setMSGType("success");
+            setMSG("Tạo review thành công !");
+            setOpenSnackBar(true);
+            props.setReloadData(!props.reloadData);
+          })
+          .catch((err) => console.log(err));
+        setReview(defaultR);
+        setTopicList([]);
+        setConfirm(false);
+        // props.setOpen(false);
+      }
+    };
+  
+    const addTopicToList = () => {
+      if (
+        topicList.filter((topic: any) => topic === addTopic).length === 0 &&
+        topicList.length < 5 &&
+        addTopic !== ""
+      ) {
+        setTopicList([...topicList, addTopic]);
+        setAddTopic("");
+        return;
+      }
+      if (topicList.length === 5) {
+        setMSGType("error");
+        setMSG("Số topic tối đa là 5!");
+        setOpenSnackBar(true);
+      }
+      if (addTopic === "") {
+        setMSGType("error");
+        setMSG("Topic không hợp lệ!");
+        setOpenSnackBar(true);
+      }
+    };
+  
+    const handleDeleteTopic = (topic: any) => {
+      const newList = topicList.filter((topics: any) => topics !== topic);
+      setTopicList(newList);
+    };
+    return (
+      <div className="w-full m-2 p-2">
+        <span className="py-3 text-2xl font-semibold">VIẾT REVIEW</span>
+        <form className="py-6" onSubmit={handleSubmit}>
+          <div className="flex flex-wrap">
+            <TextField
+              name="title"
+              value={review.title}
+              fullWidth
+              label="Tiêu đề"
+              id="fullWidth"
+              // htmlFor="component-outlined"
+              size="small"
+              sx={{ mb: 2 }}
+              onChange={handleChange}
+              required
+            />
+            <div className="w-4/5 flex mb-4 items-center">
+              <div className="w-4/5">
+                <TextField
+                  name="title"
+                  value={addTopic}
+                  fullWidth
+                  label="Topic"
+                  // id="fullWidth"
+                  // htmlFor="component-outlined"
+                  size="small"
+                  onChange={(e: any) => setAddTopic(e.target.value)}
+                />
+              </div>
+  
+              <div className="w-1/5">
+                <button
+                  className="bg-cyan-500 text-white p-2 rounded-md"
+                  onClick={addTopicToList}
+                >
+                  <AddIcon />
+                </button>
+              </div>
+            </div>
+            <div className="w-full flex  flex-wrap">
+              {topicList.map((topic: any) => (
+                <div className="mr-2 pb-3">
+                  <Chip
+                    label={topic}
+                    variant="outlined"
+                    onDelete={() => handleDeleteTopic(topic)}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="w-4/5 mb-4 pt-1 pr-3">
+              <FormControl size="small" fullWidth>
+                <InputLabel id="demo-select-small">Thể loại</InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  fullWidth
+                  label="Thể loại"
+                  name="type"
+                  value={review.type}
+                  onChange={handleChange}
+                >
+                  <MenuItem value="Review môn học">Review môn học</MenuItem>
+                  <MenuItem value="Review học kì">Review học kì</MenuItem>
+                  <MenuItem value="Review khác">Review khác</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+          <div className="my-4 w-full" ref={editor}>
+            <JoditReact
+            defaultValue={review.description}
+            // tabIndex={1} // tabIndex of textarea
+            onChange={newContent => setReview({ ...review, description: newContent })} 
+            config={config}
+        />
+          </div>
+          <div className="">
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={() => setConfirm(true)}
+            >
+              Tạo review
+            </Button>
+          </div>
+        </form>
+        <Snackbar
+          open={openSnackBar}
+          autoHideDuration={3000}
+          onClose={handleCloseSnackBar}
+        >
+          <Message
+            severity={MSGType}
+            sx={{ width: "100%" }}
+            onClose={handleCloseSnackBar}
+          >
+            {MSG}
+          </Message>
+        </Snackbar>
+      </div>
+    );
+  };
+  
+  export default CreateReviewForm;
+  
