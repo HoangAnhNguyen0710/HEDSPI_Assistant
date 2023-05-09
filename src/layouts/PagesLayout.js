@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import Loader from "../slices/loader";
+import Loader from "../components/PageLoader/loader";
 // import { NavLink } from "react-router-dom";
 
 const PageLayout = (props) => {

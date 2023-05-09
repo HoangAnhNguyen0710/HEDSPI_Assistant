@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { postComment } from '../../service/api';
+import { postComment } from '../../services/api';
 
 const CreateCommentForm = (props) => {
   const user = useSelector((state) => state.user.value);

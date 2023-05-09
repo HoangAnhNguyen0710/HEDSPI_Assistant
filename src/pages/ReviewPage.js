@@ -6,7 +6,7 @@ import ReviewList from "../components/ReviewList";
 import PageLayout from "../layouts/PagesLayout";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { getReview, getReviewNum } from "../service/api";
+import { getReview, getReviewNum } from "../services/api";
 import { setReviews } from "../slices/review";
 import CreateReviewForm from "../components/Form/CreateReviewForm";
 import PagePagination from "../layouts/Pagination";

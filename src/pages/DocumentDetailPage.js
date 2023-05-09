@@ -15,7 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CreateCommentForm from "../components/Form/CreateCommentForm";
 import { useEffect } from "react";
-import { checkHasLike, disLike, getDocumentById, getDocumentCmt, postLike } from "../service/api";
+import { checkHasLike, disLike, getDocumentById, getDocumentCmt, postLike } from "../services/api";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { storage } from "../config/firebaseConfig";
 import { useSelector } from "react-redux";

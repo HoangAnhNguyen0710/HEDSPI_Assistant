@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Message from "../Message";
-import { postQuestion } from "../../service/api";
+import { postQuestion } from "../../services/api";
 import JoditReact from "jodit-react-ts";
 import { useSelector } from "react-redux";
 

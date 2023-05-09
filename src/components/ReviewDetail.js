@@ -7,7 +7,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import moment from "moment";
 import { Chip } from "@mui/material";
 import CreateCommentForm from "./Form/CreateCommentForm";
-import { checkHasLike, disLike, getReviewCmt, postLike } from "../service/api";
+import { checkHasLike, disLike, getReviewCmt, postLike } from "../services/api";
 import { useSelector } from "react-redux";
 
 const ReviewDetail = (props) => {

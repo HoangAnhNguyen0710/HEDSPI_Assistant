@@ -19,7 +19,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../service/api";
+import { userLogin } from "../services/api";
 import { setUser } from "../slices/user";
 
 const DropdownMenu = () => {

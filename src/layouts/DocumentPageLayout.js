@@ -12,7 +12,7 @@ import {
   import { useState } from "react";
   import DocumentList from "../components/DocumentList";
   import { useDispatch } from "react-redux";
-  import { getDocument, getDocumentNum } from "../service/api";
+  import { getDocument, getDocumentNum } from "../services/api";
   import { setDocs } from "../slices/document";
   import Pagination from "../layouts/Pagination";
   

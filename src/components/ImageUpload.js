@@ -33,16 +33,6 @@ const ImageUploader = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.upload]);
 
-  // useEffect(() => {
-  //   listAll(imagesListRef).then((response) => {
-  //     response.items.forEach((item) => {
-  //       getDownloadURL(item).then((url) => {
-  //         setImageUrls((prev) => [...prev, url]);
-  //       });
-  //     });
-  //   });
-  // }, []);
-
   const handleChange = (files) => {
     setImageUpload(files);
   };

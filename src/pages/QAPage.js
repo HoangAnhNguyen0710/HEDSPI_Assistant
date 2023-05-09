@@ -13,7 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Question from "../components/Question";
 import CreateQuestionForm from "../components/Form/CreateQuestionForm";
 import { useEffect } from "react";
-import { getQuestion, getQuestionNum } from "../service/api";
+import { getQuestion, getQuestionNum } from "../services/api";
 import { setQuestions } from "../slices/question";
 import { useDispatch, useSelector } from "react-redux";
 import PagePagination from "../layouts/Pagination";

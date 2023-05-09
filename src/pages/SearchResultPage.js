@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Document from "../components/Document";
 import PageLayout from "../layouts/PagesLayout";
-import { getSearchDocument } from "../service/api";
+import { getSearchDocument } from "../services/api";
 import Doraemon from "../assets/img/mon.png";
 
 const SearchResultPage = () => {

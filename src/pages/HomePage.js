@@ -15,7 +15,7 @@ import { NavLink } from "react-router-dom";
 import DocumentList from "../components/DocumentList";
 import QuestionList from "../components/QuestionList";
 import { useEffect } from "react";
-import { getDocument, getQuestion } from "../service/api";
+import { getDocument, getQuestion } from "../services/api";
 import { setQuestions } from "../slices/question";
 import { useDispatch } from "react-redux";
 import { useState } from "react";

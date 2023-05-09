@@ -14,7 +14,7 @@ import ImageUploader from "../ImageUpload";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllSubject, postDocument } from "../../service/api";
+import { getAllSubject, postDocument } from "../../services/api";
 import { setSubjects } from "../../slices/subjects";
 import JoditReact from "jodit-react-ts";
 
